@@ -1,13 +1,19 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Navigation } from './Navigation'
 import { Routes } from './Routes'
-import './App.css'
 
 const App: React.FC = () => (
-	<div className="App">
+	<Container>
 		<Navigation />
 		<Routes />
-	</div>
+	</Container>
 )
 
 export default App
+
+const Container = styled.div`
+	text-align: center;
+	flex: 1;
+	display: flex;
+`

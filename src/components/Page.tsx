@@ -1,14 +1,21 @@
 import React from 'react'
+import styled from 'styled-components'
 
 export interface PageProps {
 	name: string
 }
 export const Page: React.FC<PageProps> = ({ name, children }) => (
-	<div className="page">
+	<PageContainer>
 		<Title text={name} />
 		{children}
-	</div>
+	</PageContainer>
 )
+
+const PageContainer = styled.div`
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+`
 
 export interface TitleProps {
 	text: string
