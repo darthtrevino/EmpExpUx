@@ -4,10 +4,14 @@ import { useProjects } from '../../../hooks/useProjects'
 
 export const FindExperts: React.FC = () => {
 	const projects = useProjects()
-	console.log('Projects: ', projects)
 	return (
 		<Page name="Find Experts">
-			<div>content</div>
+			<h1>Projects:</h1>
+			<ul>
+				{projects.map(p => (
+					<li key={p}>{p}</li>
+				))}
+			</ul>
 		</Page>
 	)
 }
