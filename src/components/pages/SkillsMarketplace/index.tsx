@@ -1,3 +1,7 @@
 import React from 'react'
 
-export const SkillsMarketplace: React.FC = () => <div>Skills Marketplace</div>
+export const SkillsMarketplace: React.FC = () => (
+	<div className="page">
+		<div>Skills Marketplace</div>
+	</div>
+)
