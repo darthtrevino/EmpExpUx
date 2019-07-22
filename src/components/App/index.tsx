@@ -1,13 +1,17 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import styled from 'styled-components'
 import { Navigation } from './Navigation'
 import { Routes } from './Routes'
+import store from '../../state'
 
 const App: React.FC = () => (
-	<Container>
-		<Navigation />
-		<Routes />
-	</Container>
+	<Provider store={store}>
+		<Container>
+			<Navigation />
+			<Routes />
+		</Container>
+	</Provider>
 )
 
 export default App
