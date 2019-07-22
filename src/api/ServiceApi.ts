@@ -9,6 +9,11 @@ enum Endpoint {
 	Topics = 'Topics',
 }
 
+enum HttpMethod {
+	POST = 'POST',
+	PUT = 'PUT',
+}
+
 export class ServiceApi {
 	public constructor(private serviceRoot: string) {}
 
@@ -22,7 +27,7 @@ export class ServiceApi {
 
 	public async addEmployee(employee: Employee): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Employee), {
-			method: 'POST',
+			method: HttpMethod.POST,
 			body: JSON.stringify(employee),
 		})
 		this.inspectResponse(response)
@@ -30,7 +35,7 @@ export class ServiceApi {
 
 	public async updateEmployee(employee: Employee): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Employee), {
-			method: 'PUT',
+			method: HttpMethod.PUT,
 			body: JSON.stringify(employee),
 		})
 		this.inspectResponse(response)
