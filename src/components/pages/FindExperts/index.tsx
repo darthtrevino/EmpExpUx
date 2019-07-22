@@ -1,9 +1,10 @@
 import React from 'react'
+import { Page } from '../../Page'
 
 export const FindExperts: React.FC = () => {
 	return (
-		<div className="page">
-			<div>Find Experts</div>
-		</div>
+		<Page name="Find Experts">
+			<div>content</div>
+		</Page>
 	)
 }

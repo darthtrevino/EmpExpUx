@@ -1,7 +1,10 @@
 import React from 'react'
+import { Page } from '../../Page'
 
-export const Home: React.FC = () => (
-	<div className="page">
-		<div>Home</div>
-	</div>
-)
+export const Home: React.FC = () => {
+	return (
+		<Page name="Home">
+			<div>content</div>
+		</Page>
+	)
+}
