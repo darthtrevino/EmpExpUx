@@ -1,5 +1,5 @@
-export * from './model'
 import { ServiceApi } from './ServiceApi'
+export * from './model'
 
 const rootUrl: string = process.env['REACT_APP_SERVICE_ROOT'] as string
 console.log('instantiating services at root url', rootUrl)

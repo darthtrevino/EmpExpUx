@@ -1,7 +1,8 @@
-import { Action } from 'redux-actions'
+import apicache, { State as ApiCacheState } from './apicache'
+import { combineReducers } from 'redux'
 
-export interface State {}
-
-export default function reduce(state: State = {}, action: Action<any>) {
-	return state
+export interface State {
+	apicache: ApiCacheState
 }
+
+export default combineReducers({ apicache })
