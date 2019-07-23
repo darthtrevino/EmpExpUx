@@ -7,7 +7,6 @@ import {
 	IPersonaProps,
 	PersonaPresence,
 } from 'office-ui-fabric-react'
-import styled from 'styled-components'
 import { Employee } from '../../api'
 import styles from './EmployeeInfo.module.scss'
 
