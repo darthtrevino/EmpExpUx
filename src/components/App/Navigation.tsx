@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react'
-import { IconButton, Nav } from 'office-ui-fabric-react'
+import { IconButton, Nav, INavLink } from 'office-ui-fabric-react'
 import { withRouter } from 'react-router-dom'
 import { jsStyles } from './Navigation.styles'
 
@@ -7,7 +7,6 @@ export const Navigation = memo(
 	withRouter(({ history }) => {
 		let [isOpen, setIsOpen] = useState(true)
 		let toggleNav = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
-
 		const styles = jsStyles(isOpen)
 
 		const handleLinkClick = useCallback(
@@ -27,14 +26,14 @@ export const Navigation = memo(
 							ariaLabel="Toggle Nav"
 							iconProps={{ iconName: 'GlobalNavButton' }}
 							onClick={toggleNav}
-							styles={styles.navToggleBtn}
+							styles={styles.navToggleBtn as any}
 						/>
 					</div>
 					<Nav
 						selectedKey={history.location.pathname}
 						onLinkClick={handleLinkClick}
 						groups={NavigationGroups}
-						styles={styles.nav}
+						styles={styles.nav as any}
 					/>
 				</div>
 			</div>
@@ -42,7 +41,7 @@ export const Navigation = memo(
 	}),
 )
 
-const NavigationGroups = [
+const NavigationGroups: Array<{ links: INavLink[] }> = [
 	{
 		links: [
 			{

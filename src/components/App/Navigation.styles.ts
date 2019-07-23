@@ -1,6 +1,6 @@
 import { ColorPalette } from '../../styles'
 
-export const jsStyles = isExpanded => {
+export const jsStyles = (isExpanded: boolean) => {
 	return {
 		sidePanel: {
 			flex: isExpanded ? '0 1 280px' : '0 1 50px',
@@ -73,5 +73,5 @@ export const jsStyles = isExpanded => {
 				margin: 0,
 			},
 		},
-	}
+	} as Record<string, React.CSSProperties>
 }
