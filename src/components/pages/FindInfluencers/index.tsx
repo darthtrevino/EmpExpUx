@@ -11,9 +11,11 @@ export const FindInfluencers: React.FC = memo(() => {
 			<InfluencerFilterPane onFilterChange={handleFilterChanged} />
 			<div>
 				<ul>
-					{employees.map(m => (
-						<EmployeeCard key={m.id} employee={m} />
-					))}
+					{employees
+						.filter(e => !!(e && e.email))
+						.map(m => (
+							<EmployeeCard key={m.id} employee={m} />
+						))}
 				</ul>
 			</div>
 		</Page>
