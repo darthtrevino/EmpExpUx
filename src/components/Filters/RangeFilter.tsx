@@ -1,4 +1,5 @@
-import React, { memo, useRef } from 'react'
+import React, { memo, useCallback, useState } from 'react'
+import { Slider } from 'office-ui-fabric-react'
 
 // @ts-ignore
 import styled from 'styled-components'
@@ -9,33 +10,41 @@ export interface RangeFilterProps {
 }
 
 export const RangeFilter: React.FC<RangeFilterProps> = memo(
-	({ onSelectionChanged, range: [min, max] }) => {
-		const minRef = useRef<HTMLInputElement>(null)
-		const maxRef = useRef<HTMLInputElement>(null)
+	({ range: [min, max], onSelectionChanged }) => {
+		const onMinChanged = useCallback(
+			(value: number) => {
+				const _min = Math.min(value, max)
+				const _max = Math.max(value, max)
+				onSelectionChanged([_min, _max])
+			},
+			[max, onSelectionChanged],
+		)
+
+		const onMaxChanged = useCallback(
+			(value: number) => {
+				const _min = Math.min(value, min)
+				const _max = Math.max(value, min)
+				onSelectionChanged([_min, _max])
+			},
+			[min, onSelectionChanged],
+		)
+
 		return (
 			<Container>
-				<input
-					ref={minRef}
-					type="number"
+				<Slider
+					min={0}
+					max={1}
 					value={min}
-					onChange={() => {
-						onSelectionChanged([
-							minRef.current!.value,
-							maxRef.current!.value,
-						] as any)
-					}}
-				></input>
-				<input
-					ref={maxRef}
-					type="number"
+					step={0.01}
+					onChange={onMinChanged}
+				/>
+				<Slider
+					min={0}
+					max={1}
 					value={max}
-					onChange={() =>
-						onSelectionChanged([
-							minRef.current!.value,
-							maxRef.current!.value,
-						] as any)
-					}
-				></input>
+					step={0.01}
+					onChange={onMaxChanged}
+				/>
 			</Container>
 		)
 	},
