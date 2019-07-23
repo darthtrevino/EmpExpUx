@@ -5,8 +5,9 @@ import { Routes } from './Routes'
 import { Navigation } from './Navigation'
 import store from '../../state'
 import styles from './App.module.scss'
+import { BrowserRouter } from 'react-router-dom'
 
-const App: React.FC = memo(() => {
+export const App: React.FC = memo(() => {
 	const titleText = 'Employee Experience'
 	return (
 		<Provider store={store}>
@@ -24,14 +25,16 @@ const App: React.FC = memo(() => {
 							<div className={styles.title}>{titleText}</div>
 						</div>
 					</div>
-					<div className={styles.contentContainer}>
-						<div className={styles.sidePanel}>
-							<Navigation />
+					<BrowserRouter>
+						<div className={styles.contentContainer}>
+							<div className={styles.sidePanel}>
+								<Navigation />
+							</div>
+							<div className={styles.pageContainer}>
+								<Routes />
+							</div>
 						</div>
-						<div className={styles.pageContainer}>
-							<Routes />
-						</div>
-					</div>
+					</BrowserRouter>
 				</div>
 			</Fabric>
 		</Provider>
