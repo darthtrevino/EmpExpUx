@@ -8,14 +8,14 @@ import { useTopics } from '../../../hooks/useTopics'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
 import { TextFilter } from '../../Filters/TextFilter'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
-import { buildFilter } from './buildFilter'
 import { useTripwire } from '../../../hooks/useTripwire'
+import { buildFilter } from './buildFilter'
 
-export interface FilterPaneProps {
+export interface ExpertFilterPaneProps {
 	onFilterChange: (expr: FilterExpression) => void
 }
 
-export const FilterPane: React.FC<FilterPaneProps> = memo(
+export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 	({ onFilterChange }) => {
 		const projects = useProjects()
 		const skills = useSkills()
@@ -119,7 +119,6 @@ export const FilterPane: React.FC<FilterPaneProps> = memo(
 								<FilterBy>Organization</FilterBy>
 								<TextFilter onSelectionChanged={handleOrganizationChanged} />
 							</FilterSection>
-
 							<FilterSection>
 								<FilterBy>Relevant Skills</FilterBy>
 								<CategoryFilter
