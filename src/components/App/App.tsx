@@ -5,20 +5,18 @@ import styles from './App.module.scss'
 import { Header } from './Header'
 import { AppProviders } from './AppProviders'
 
-export const App: React.FC = memo(() => {
-	return (
-		<AppProviders>
-			<div className={styles.appContainer}>
-				<Header />
-				<div className={styles.contentContainer}>
-					<div className={styles.sidePanel}>
-						<Navigation />
-					</div>
-					<div className={styles.pageContainer}>
-						<Routes />
-					</div>
+export const App: React.FC = memo(() => (
+	<AppProviders>
+		<div className={styles.appContainer}>
+			<Header />
+			<div className={styles.contentContainer}>
+				<div className={styles.sidePanel}>
+					<Navigation />
+				</div>
+				<div className={styles.pageContainer}>
+					<Routes />
 				</div>
 			</div>
-		</AppProviders>
-	)
-})
+		</div>
+	</AppProviders>
+))
