@@ -10,25 +10,39 @@ interface CategorySelection {
 	name: string
 }
 
+const toCategorySelection = (id: string) =>
+	({ id, name: id } as CategorySelection)
+
 export interface CategoryFilterProps {
 	categories: string[]
+	onSelectionChanged: (selection: string[]) => void
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 	categories,
+	onSelectionChanged,
 }) => {
 	const [selected, setSelected] = useState<CategorySelection[]>([])
+	const [interacted, setInteracted] = useState(false)
 	const suggestions = useMemo<CategorySelection[]>(
-		() => categories.map(p => ({ id: p, name: p })),
+		() => categories.map(toCategorySelection),
 		[categories],
 	)
+	useEffect(() => {
+		if (interacted) {
+			onSelectionChanged(selected.map(s => s.id))
+		}
+	}, [selected, interacted])
 
 	const handleAdd = useCallback(
 		(items: CategorySelection | CategorySelection[]) => {
+			setInteracted(true)
 			if (Array.isArray(items)) {
 				setSelected([...selected, ...items])
 			} else {
-				setSelected([...selected, items])
+				if (!selected.some(s => s.id === items.id)) {
+					setSelected([...selected, items])
+				}
 			}
 		},
 		[selected],
@@ -36,6 +50,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
 	const handleRemove = useCallback(
 		(index: number) => {
+			setInteracted(true)
 			setSelected([...selected.slice(0, index), ...selected.slice(index + 1)])
 		},
 		[selected],
@@ -46,11 +61,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 	}, [categories])
 
 	const handleButtonClick = useCallback(
-		() =>
-			handleAdd(({
-				id: selectedOption,
-				name: selectedOption,
-			} as any) as CategorySelection),
+		() => handleAdd(toCategorySelection(selectedOption)),
 		[selectedOption, handleAdd],
 	)
 
