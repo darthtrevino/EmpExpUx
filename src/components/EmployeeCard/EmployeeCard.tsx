@@ -16,21 +16,15 @@ export interface EmployeeCardProps {
 	employee: Employee
 }
 
-// For demo only
-const randPresense = () =>
-	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
-
 export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 	({ employee }) => {
-		const _onRenderSecondaryText = useCallback(
-			(props: IPersonaProps): JSX.Element => {
-				return (
-					<div>
-						<RoleIcon iconName={'Suitcase'} />
-						{props.secondaryText}
-					</div>
-				)
-			},
+		const onRenderSecondaryText = useCallback(
+			(props: IPersonaProps): JSX.Element => (
+				<div>
+					<RoleIcon iconName={'Suitcase'} />
+					{props.secondaryText}
+				</div>
+			),
 			[],
 		)
 
@@ -50,7 +44,7 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 				<Persona
 					{...personaData}
 					size={PersonaSize.size72}
-					onRenderSecondaryText={_onRenderSecondaryText as any}
+					onRenderSecondaryText={onRenderSecondaryText as any}
 				/>
 				<AttributesPane>
 					<TagAttribute name="Projects" value={employee.projects} />
@@ -76,6 +70,10 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 		)
 	},
 )
+
+// For demo only
+const randPresense = () =>
+	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
 
 const RoleIcon = styled(Icon)`
 	margin-right: 5px;
