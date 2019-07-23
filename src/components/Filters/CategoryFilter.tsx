@@ -4,9 +4,9 @@ import React, { useState, useMemo, useCallback, useEffect, memo } from 'react'
 import ReactTags from 'react-tag-autocomplete'
 import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
 import 'react-tag-autocomplete/'
-import styled from 'styled-components'
 import './react-tags.css'
 import { useTripwire } from '../../hooks/useTripwire'
+import styles from './CategoryFilter.module.scss'
 
 interface CategorySelection {
 	id: string
@@ -72,8 +72,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 		)
 
 		return (
-			<Container>
-				<Row>
+			<div className={styles.container}>
+				<div className={styles.row}>
 					<ReactTags
 						tags={selected}
 						suggestions={suggestions}
@@ -81,8 +81,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 						onAddition={handleAdd}
 						placeholder="Add category"
 					/>
-				</Row>
-				<RowRight>
+				</div>
+				<div className={styles.rowRight}>
 					<ComboBox
 						selectedKey={selectedOption}
 						options={comboBoxOptions}
@@ -93,23 +93,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 						}}
 					></ComboBox>
 					<PrimaryButton onClick={handleButtonClick}>Add</PrimaryButton>
-				</RowRight>
-			</Container>
+				</div>
+			</div>
 		)
 	},
 )
-
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-`
-
-const RowRight = styled(Row)`
-	justify-content: flex-end;
-`
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 10px;
-`

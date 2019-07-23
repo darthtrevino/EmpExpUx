@@ -1,8 +1,6 @@
 import React, { memo, useCallback } from 'react'
 import { Slider } from 'office-ui-fabric-react'
-
-// @ts-ignore
-import styled from 'styled-components'
+import styles from './RangeFilter.module.scss'
 
 export interface RangeFilterProps {
 	range: [number, number]
@@ -30,7 +28,7 @@ export const RangeFilter: React.FC<RangeFilterProps> = memo(
 		)
 
 		return (
-			<Container>
+			<div className={styles.container}>
 				<Slider
 					min={0}
 					max={1}
@@ -45,13 +43,7 @@ export const RangeFilter: React.FC<RangeFilterProps> = memo(
 					step={0.01}
 					onChange={onMaxChanged}
 				/>
-			</Container>
+			</div>
 		)
 	},
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 10px;
-`
