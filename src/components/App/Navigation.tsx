@@ -41,25 +41,22 @@ const NavigationGroups: NavLinkGroup = [
 				name: 'Home',
 				url: '/',
 				key: 'home',
-				links: [
-					{
-						name: 'Find Experts',
-						url: '/experts',
-						key: 'experts',
-					},
-					{
-						name: 'Find Influencers',
-						url: '/influencers',
-						key: 'influencers',
-					},
+			},
+			{
+				name: 'Find Experts',
+				url: '/experts',
+				key: 'experts',
+			},
+			{
+				name: 'Find Influencers',
+				url: '/influencers',
+				key: 'influencers',
+			},
 
-					{
-						name: 'Skills Marketplace',
-						url: '/skills-marketplace',
-						key: 'skill-marketplace',
-					},
-				],
-				isExpanded: true,
+			{
+				name: 'Skills Marketplace',
+				url: '/skills-marketplace',
+				key: 'skill-marketplace',
 			},
 			{
 				name: 'My Expertise',
