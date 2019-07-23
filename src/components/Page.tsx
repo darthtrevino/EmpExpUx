@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 export interface PageProps {
 	name: string
 }
-export const Page: React.FC<PageProps> = ({ name, children }) => (
+export const Page: React.FC<PageProps> = memo(({ name, children }) => (
 	<PageContainer>
 		<Title>{name}</Title>
 		{children}
 	</PageContainer>
-)
+))
 
 const PageContainer = styled.div`
 	flex-direction: column;

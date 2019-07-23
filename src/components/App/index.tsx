@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Provider } from 'react-redux'
 import styled from 'styled-components'
 import { Routes } from './Routes'
 import store from '../../state'
 
-const App: React.FC = () => (
+const App: React.FC = memo(() => (
 	<Provider store={store}>
 		<Container>
 			<Routes />
 		</Container>
 	</Provider>
-)
+))
 
 export default App
 

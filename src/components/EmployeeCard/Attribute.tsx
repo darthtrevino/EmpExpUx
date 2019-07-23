@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { AttributeContainer, AttributeName, AttributeValue } from './common'
 
 export interface AttributeProps {
@@ -6,9 +6,9 @@ export interface AttributeProps {
 	value: string
 }
 
-export const Attribute: React.FC<AttributeProps> = ({ name, value }) => (
+export const Attribute: React.FC<AttributeProps> = memo(({ name, value }) => (
 	<AttributeContainer>
 		<AttributeName>{name}</AttributeName>
 		<AttributeValue>{value}</AttributeValue>
 	</AttributeContainer>
-)
+))

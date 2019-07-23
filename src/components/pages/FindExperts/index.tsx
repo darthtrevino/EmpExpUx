@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Page } from '../../Page'
 import { FilterPane } from './FilterPane'
 import { EmployeeCard } from '../../EmployeeCard'
 import { useEmployeeFilter } from '../../../hooks/useEmployeeFilter'
 
-export const FindExperts: React.FC = () => {
+export const FindExperts: React.FC = memo(() => {
 	const [employees, handleFilterChanged] = useEmployeeFilter()
 	return (
 		<Page name="Find Experts">
@@ -18,4 +18,4 @@ export const FindExperts: React.FC = () => {
 			</div>
 		</Page>
 	)
-}
+})

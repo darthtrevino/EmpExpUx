@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React, { useState, useMemo, useCallback, useEffect, memo } from 'react'
 
 // @ts-ignore
 import ReactTags from 'react-tag-autocomplete'
@@ -20,77 +20,76 @@ export interface CategoryFilterProps {
 	onSelectionChanged: (selection: string[]) => void
 }
 
-export const CategoryFilter: React.FC<CategoryFilterProps> = ({
-	categories,
-	onSelectionChanged,
-}) => {
-	const [selected, setSelected] = useState<CategorySelection[]>([])
-	const [interacted, markInteracted] = useTripwire()
-	const suggestions = useMemo<CategorySelection[]>(
-		() => categories.map(toCategorySelection),
-		[categories],
-	)
-	useEffect(() => {
-		if (interacted) {
-			onSelectionChanged(selected.map(s => s.id))
-		}
-	}, [selected, interacted, onSelectionChanged])
-
-	const handleAdd = useCallback(
-		(items: CategorySelection | CategorySelection[]) => {
-			markInteracted()
-			if (Array.isArray(items)) {
-				setSelected([...selected, ...items])
-			} else {
-				if (!selected.some(s => s.id === items.id)) {
-					setSelected([...selected, items])
-				}
+export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
+	({ categories, onSelectionChanged }) => {
+		const [selected, setSelected] = useState<CategorySelection[]>([])
+		const [interacted, markInteracted] = useTripwire()
+		const suggestions = useMemo<CategorySelection[]>(
+			() => categories.map(toCategorySelection),
+			[categories],
+		)
+		useEffect(() => {
+			if (interacted) {
+				onSelectionChanged(selected.map(s => s.id))
 			}
-		},
-		[selected, markInteracted],
-	)
+		}, [selected, interacted, onSelectionChanged])
 
-	const handleRemove = useCallback(
-		(index: number) => {
-			markInteracted()
-			setSelected([...selected.slice(0, index), ...selected.slice(index + 1)])
-		},
-		[selected, markInteracted],
-	)
-	const [selectedOption, setSelectedOption] = useState(categories[0])
-	useEffect(() => {
-		setSelectedOption(categories[0])
-	}, [categories])
+		const handleAdd = useCallback(
+			(items: CategorySelection | CategorySelection[]) => {
+				markInteracted()
+				if (Array.isArray(items)) {
+					setSelected([...selected, ...items])
+				} else {
+					if (!selected.some(s => s.id === items.id)) {
+						setSelected([...selected, items])
+					}
+				}
+			},
+			[selected, markInteracted],
+		)
 
-	const handleButtonClick = useCallback(
-		() => handleAdd(toCategorySelection(selectedOption)),
-		[selectedOption, handleAdd],
-	)
+		const handleRemove = useCallback(
+			(index: number) => {
+				markInteracted()
+				setSelected([...selected.slice(0, index), ...selected.slice(index + 1)])
+			},
+			[selected, markInteracted],
+		)
+		const [selectedOption, setSelectedOption] = useState(categories[0])
+		useEffect(() => {
+			setSelectedOption(categories[0])
+		}, [categories])
 
-	return (
-		<Container>
-			<Row>
-				<ReactTags
-					tags={selected}
-					suggestions={suggestions}
-					onDelete={handleRemove}
-					onAddition={handleAdd}
-					placeholder="Add category"
-				/>
-			</Row>
-			<RowRight>
-				<CategoryOption onChange={evt => setSelectedOption(evt.target.value)}>
-					{categories.map(c => (
-						<option key={c} value={c}>
-							{c}
-						</option>
-					))}
-				</CategoryOption>
-				<CategoryButton onClick={handleButtonClick}>Add</CategoryButton>
-			</RowRight>
-		</Container>
-	)
-}
+		const handleButtonClick = useCallback(
+			() => handleAdd(toCategorySelection(selectedOption)),
+			[selectedOption, handleAdd],
+		)
+
+		return (
+			<Container>
+				<Row>
+					<ReactTags
+						tags={selected}
+						suggestions={suggestions}
+						onDelete={handleRemove}
+						onAddition={handleAdd}
+						placeholder="Add category"
+					/>
+				</Row>
+				<RowRight>
+					<CategoryOption onChange={evt => setSelectedOption(evt.target.value)}>
+						{categories.map(c => (
+							<option key={c} value={c}>
+								{c}
+							</option>
+						))}
+					</CategoryOption>
+					<CategoryButton onClick={handleButtonClick}>Add</CategoryButton>
+				</RowRight>
+			</Container>
+		)
+	},
+)
 
 const CategoryOption = styled.select`
 	width: 200px;

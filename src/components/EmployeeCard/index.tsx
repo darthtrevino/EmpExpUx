@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 import { Employee } from '../../api'
 import { Attribute } from './Attribute'
@@ -8,21 +8,23 @@ export interface EmployeeCardProps {
 	employee: Employee
 }
 
-export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
-	return (
-		<Container className="ms-depth-8">
-			<Email>{employee.email}</Email>
-			<AttributesPane>
-				<Attribute name="Region" value={employee.region} />
-				<Attribute name="Function" value={employee.function} />
-				<Attribute name="Organization" value={employee.organization} />
-				<TagAttribute name="Projects" value={employee.projects} />
-				<TagAttribute name="Skills" value={employee.skills} />
-				<TagAttribute name="Topics" value={employee.topics} />
-			</AttributesPane>
-		</Container>
-	)
-}
+export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
+	({ employee }) => {
+		return (
+			<Container className="ms-depth-8">
+				<Email>{employee.email}</Email>
+				<AttributesPane>
+					<Attribute name="Region" value={employee.region} />
+					<Attribute name="Function" value={employee.function} />
+					<Attribute name="Organization" value={employee.organization} />
+					<TagAttribute name="Projects" value={employee.projects} />
+					<TagAttribute name="Skills" value={employee.skills} />
+					<TagAttribute name="Topics" value={employee.topics} />
+				</AttributesPane>
+			</Container>
+		)
+	},
+)
 
 const AttributesPane = styled.div`
 	padding: 50px;
