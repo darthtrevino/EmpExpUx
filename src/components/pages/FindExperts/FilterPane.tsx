@@ -102,27 +102,31 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 				></HeaderIcon>
 			</Header>
 			<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
-				<FilterSection>
-					<FilterBy>Relevant Skills</FilterBy>
-					<CategoryFilter
-						categories={skills}
-						onSelectionChanged={handleSkillsChanged}
-					/>
-				</FilterSection>
-				<FilterSection>
-					<FilterBy>Project Involvement</FilterBy>
-					<CategoryFilter
-						categories={projects}
-						onSelectionChanged={handleProjectsChanged}
-					/>
-				</FilterSection>
-				<FilterSection>
-					<FilterBy>Topics of Expertise</FilterBy>
-					<CategoryFilter
-						categories={topics}
-						onSelectionChanged={handleTopicsChanged}
-					/>
-				</FilterSection>
+				{expanded ? (
+					<>
+						<FilterSection>
+							<FilterBy>Relevant Skills</FilterBy>
+							<CategoryFilter
+								categories={skills}
+								onSelectionChanged={handleSkillsChanged}
+							/>
+						</FilterSection>
+						<FilterSection>
+							<FilterBy>Project Involvement</FilterBy>
+							<CategoryFilter
+								categories={projects}
+								onSelectionChanged={handleProjectsChanged}
+							/>
+						</FilterSection>
+						<FilterSection>
+							<FilterBy>Topics of Expertise</FilterBy>
+							<CategoryFilter
+								categories={topics}
+								onSelectionChanged={handleTopicsChanged}
+							/>
+						</FilterSection>
+					</>
+				) : null}
 			</FilterArea>
 		</Container>
 	)
@@ -133,8 +137,8 @@ const FilterSection = styled.div`
 `
 
 const FilterArea = posed.div({
-	collapsed: { opacity: 0, height: 1 },
-	expanded: { opacity: 1, height: 'auto' },
+	collapsed: { height: 1, opacity: 0 },
+	expanded: { height: 'auto', opacity: 1 },
 })
 
 const Header = styled.div`
