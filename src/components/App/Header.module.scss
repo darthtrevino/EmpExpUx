@@ -1,0 +1,31 @@
+.header {
+	flex: 0 0;
+}
+
+.topBar {
+	background-color: rgba(155, 193, 204, 0.85);
+	height: 50px;
+	display: flex;
+	align-items: center;
+	.brandmark {
+		height: 50px;
+		width: 50px;
+		background-color: #5b95a5;
+		img {
+			width: 26px;
+			margin: 11px;
+		}
+	}
+	.title {
+		flex: 1 1 0px;
+		font-size: 20px;
+		font-weight: 400;
+		color: #385868;
+		padding: 0 22px;
+		text-align: left;
+	}
+}
+
+.currentUser {
+	margin-right: 8px;
+}

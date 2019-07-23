@@ -31,7 +31,7 @@ export const Navigation = memo(
 						/>
 					</div>
 					<Nav
-						// selectedKey={this.state.selectedNavKey}
+						selectedKey={history.location.pathname}
 						onLinkClick={handleLinkClick}
 						groups={NavigationGroups}
 						styles={styles.nav}

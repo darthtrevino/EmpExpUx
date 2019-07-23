@@ -1,45 +1,13 @@
-$pageHeight: calc(100vh - 50px);
-
 .appContainer {
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 }
-.header {
-	flex: 0 0;
-}
-.topBar {
-	background-color: rgba(155, 193, 204, 0.85);
-	height: 50px;
-	display: flex;
-	align-items: center;
-	.brandmark {
-		height: 50px;
-		width: 50px;
-		background-color: #5b95a5;
-		img {
-			width: 26px;
-			margin: 11px;
-		}
-	}
-	.title {
-		flex: 1 1 0px;
-		font-size: 20px;
-		font-weight: 400;
-		color: #385868;
-		padding: 0 22px;
-		text-align: left;
-	}
-}
 
 .contentContainer {
 	flex: 1;
 	display: flex;
-	height: $pageHeight;
-	// background-color: #900;
-	// text-align: center;
-	// flex: 1;
-	// display: flex;
+	height: calc(100vh - 50px);
 }
 .pageContainer {
 	flex: 1;
