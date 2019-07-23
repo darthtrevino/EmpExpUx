@@ -1,8 +1,9 @@
 import React, { memo, useCallback, useState } from 'react'
-import styled from 'styled-components'
+import classnames from 'classnames'
 import { Employee } from '../../api'
 import { EmployeeDetails } from './EmployeeDetails'
 import { EmployeeInfo } from './EmployeeInfo'
+import styles from './EmployeeCard.module.scss'
 
 export interface EmployeeCardProps {
 	employee: Employee
@@ -16,19 +17,14 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 			setExpanded,
 		])
 		return (
-			<Container className="ms-depth-8">
+			<div className={classnames('ms-depth-8', styles.container)}>
 				<EmployeeInfo
 					employee={employee}
 					expanded={expanded}
 					onToggleExpanded={toggleExpanded}
 				/>
 				{expanded ? <EmployeeDetails employee={employee} /> : null}
-			</Container>
+			</div>
 		)
 	},
 )
-
-const Container = styled.div`
-	margin: 20px;
-	padding: 15px;
-`
