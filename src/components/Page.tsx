@@ -12,9 +12,9 @@ export const Page: React.FC<PageProps> = ({ name, children }) => (
 )
 
 const PageContainer = styled.div`
-	display: flex;
-	flex: 1;
 	flex-direction: column;
+	min-height: 100%;
+	overflow: scroll;
 `
 
 const Title = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { Icon } from 'office-ui-fabric-react'
 import styled from 'styled-components'
 import posed from 'react-pose'
@@ -6,6 +6,7 @@ import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { useTopics } from '../../../hooks/useTopics'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
+import { TextFilter } from '../../Filters/TextFilter'
 import {
 	Skill,
 	Project,
@@ -21,6 +22,8 @@ export interface FilterPaneProps {
 }
 
 function buildFilter(
+	employeeFunction: string | undefined,
+	organization: string | undefined,
 	selectedSkills: Skill[],
 	selectedProjects: Project[],
 	selectedTopics: Topic[],
@@ -45,6 +48,21 @@ function buildFilter(
 			})),
 		],
 	}
+
+	if (employeeFunction) {
+		result.clauses.push({
+			op: FilterOperation.Equals,
+			field: EmployeeFields.Function,
+			value: employeeFunction,
+		})
+	}
+	if (organization) {
+		result.clauses.push({
+			op: FilterOperation.Equals,
+			field: EmployeeFields.Organization,
+			value: organization,
+		})
+	}
 	return result
 }
 
@@ -53,7 +71,14 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 	const skills = useSkills()
 	const topics = useTopics()
 
+	const [interacted, setInteracted] = useState(false)
 	const [expanded, setExpanded] = useState(true)
+	const [employeeFunction, setFunction] = useState<string | undefined>(
+		undefined,
+	)
+	const [organization, setOrganization] = useState<string | undefined>(
+		undefined,
+	)
 	const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 	const [selectedProjects, setSelectedProjects] = useState<Project[]>([])
 	const [selectedTopics, setSelectedTopics] = useState<Topic[]>([])
@@ -62,12 +87,46 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 		setExpanded,
 	])
 
+	useEffect(() => {
+		if (interacted) {
+			onFilterChange(
+				buildFilter(
+					employeeFunction,
+					organization,
+					selectedSkills,
+					selectedProjects,
+					selectedTopics,
+				),
+			)
+		}
+	}, [
+		employeeFunction,
+		organization,
+		selectedSkills,
+		selectedProjects,
+		selectedTopics,
+	])
+
+	const handleFunctionChanged = useCallback(
+		f => {
+			setFunction(f)
+			setInteracted(true)
+		},
+		[setFunction],
+	)
+
+	const handleOrganizationChanged = useCallback(
+		f => {
+			setOrganization(f)
+			setInteracted(true)
+		},
+		[setOrganization],
+	)
+
 	const handleSkillsChanged = useCallback(
 		v => {
 			setSelectedSkills(v)
-			onFilterChange(
-				buildFilter(selectedSkills, selectedProjects, selectedTopics),
-			)
+			setInteracted(true)
 		},
 		[setSelectedSkills],
 	)
@@ -75,9 +134,7 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 	const handleProjectsChanged = useCallback(
 		v => {
 			setSelectedProjects(v)
-			onFilterChange(
-				buildFilter(selectedSkills, selectedProjects, selectedTopics),
-			)
+			setInteracted(true)
 		},
 		[setSelectedProjects],
 	)
@@ -85,9 +142,7 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 	const handleTopicsChanged = useCallback(
 		v => {
 			setSelectedTopics(v)
-			onFilterChange(
-				buildFilter(selectedSkills, selectedProjects, selectedTopics),
-			)
+			setInteracted(true)
 		},
 		[setSelectedTopics],
 	)
@@ -104,6 +159,15 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 			<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
 				{expanded ? (
 					<>
+						<FilterSection>
+							<FilterBy>Function</FilterBy>
+							<TextFilter onSelectionChanged={handleFunctionChanged} />
+						</FilterSection>
+						<FilterSection>
+							<FilterBy>Organization</FilterBy>
+							<TextFilter onSelectionChanged={handleOrganizationChanged} />
+						</FilterSection>
+
 						<FilterSection>
 							<FilterBy>Relevant Skills</FilterBy>
 							<CategoryFilter
