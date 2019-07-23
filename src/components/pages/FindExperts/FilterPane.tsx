@@ -8,8 +8,9 @@ import { useTopics } from '../../../hooks/useTopics'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
 import { TextFilter } from '../../Filters/TextFilter'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
-
 import { buildFilter } from './buildFilter'
+import { useTripwire } from '../../../hooks/useTripwire'
+
 export interface FilterPaneProps {
 	onFilterChange: (expr: FilterExpression) => void
 }
@@ -19,7 +20,7 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 	const skills = useSkills()
 	const topics = useTopics()
 
-	const [interacted, setInteracted] = useState(false)
+	const [interacted, markInteracted] = useTripwire()
 	const [expanded, setExpanded] = useState(true)
 	const [employeeFunction, setFunction] = useState<string | undefined>(
 		undefined,
@@ -60,41 +61,41 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 	const handleFunctionChanged = useCallback(
 		f => {
 			setFunction(f)
-			setInteracted(true)
+			markInteracted()
 		},
-		[setFunction],
+		[setFunction, markInteracted],
 	)
 
 	const handleOrganizationChanged = useCallback(
 		f => {
 			setOrganization(f)
-			setInteracted(true)
+			markInteracted()
 		},
-		[setOrganization],
+		[setOrganization, markInteracted],
 	)
 
 	const handleSkillsChanged = useCallback(
 		v => {
 			setSelectedSkills(v)
-			setInteracted(true)
+			markInteracted()
 		},
-		[setSelectedSkills],
+		[setSelectedSkills, markInteracted],
 	)
 
 	const handleProjectsChanged = useCallback(
 		v => {
 			setSelectedProjects(v)
-			setInteracted(true)
+			markInteracted()
 		},
-		[setSelectedProjects],
+		[setSelectedProjects, markInteracted],
 	)
 
 	const handleTopicsChanged = useCallback(
 		v => {
 			setSelectedTopics(v)
-			setInteracted(true)
+			markInteracted()
 		},
-		[setSelectedTopics],
+		[setSelectedTopics, markInteracted],
 	)
 
 	return (

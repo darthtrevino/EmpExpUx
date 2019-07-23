@@ -5,6 +5,7 @@ import ReactTags from 'react-tag-autocomplete'
 import 'react-tag-autocomplete/'
 import styled from 'styled-components'
 import './react-tags.css'
+import { useTripwire } from '../../hooks/useTripwire'
 
 interface CategorySelection {
 	id: string
@@ -24,7 +25,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 	onSelectionChanged,
 }) => {
 	const [selected, setSelected] = useState<CategorySelection[]>([])
-	const [interacted, setInteracted] = useState(false)
+	const [interacted, markInteracted] = useTripwire()
 	const suggestions = useMemo<CategorySelection[]>(
 		() => categories.map(toCategorySelection),
 		[categories],
@@ -37,7 +38,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
 	const handleAdd = useCallback(
 		(items: CategorySelection | CategorySelection[]) => {
-			setInteracted(true)
+			markInteracted()
 			if (Array.isArray(items)) {
 				setSelected([...selected, ...items])
 			} else {
@@ -46,15 +47,15 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 				}
 			}
 		},
-		[selected],
+		[selected, markInteracted],
 	)
 
 	const handleRemove = useCallback(
 		(index: number) => {
-			setInteracted(true)
+			markInteracted()
 			setSelected([...selected.slice(0, index), ...selected.slice(index + 1)])
 		},
-		[selected],
+		[selected, markInteracted],
 	)
 	const [selectedOption, setSelectedOption] = useState(categories[0])
 	useEffect(() => {
