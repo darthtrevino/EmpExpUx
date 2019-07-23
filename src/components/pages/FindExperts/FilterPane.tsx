@@ -100,11 +100,13 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 			)
 		}
 	}, [
+		interacted,
 		employeeFunction,
 		organization,
 		selectedSkills,
 		selectedProjects,
 		selectedTopics,
+		onFilterChange,
 	])
 
 	const handleFunctionChanged = useCallback(

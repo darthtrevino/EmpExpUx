@@ -33,7 +33,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 		if (interacted) {
 			onSelectionChanged(selected.map(s => s.id))
 		}
-	}, [selected, interacted])
+	}, [selected, interacted, onSelectionChanged])
 
 	const handleAdd = useCallback(
 		(items: CategorySelection | CategorySelection[]) => {
