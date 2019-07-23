@@ -144,7 +144,6 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 									onSelectionChanged={handlePageRankChanged}
 								/>
 							</FilterSection>
-							>
 							<FilterSection>
 								<FilterBy>Relevant Skills</FilterBy>
 								<CategoryFilter
