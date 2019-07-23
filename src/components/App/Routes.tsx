@@ -5,11 +5,11 @@ import { FindExperts } from '../pages/FindExperts'
 import { FindInfluencers } from '../pages/FindInfluencers'
 import { SkillsMarketplace } from '../pages/SkillsMarketplace'
 import { Profile } from '../pages/Profile'
-import { Navigation } from './Navigation'
+// import { Navigation } from './Navigation'
 
 export const Routes: React.FC = memo(() => (
 	<BrowserRouter>
-		<Navigation />
+		{/* <Navigation /> */}
 		<Route path="/" exact component={Home} />
 		<Route path="/experts" component={FindExperts} />
 		<Route path="/influencers" component={FindInfluencers} />
