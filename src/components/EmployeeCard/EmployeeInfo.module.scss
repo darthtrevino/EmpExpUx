@@ -1,0 +1,13 @@
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.expandIcon {
+	cursor: default;
+}
+
+.roleIcon {
+	margin-right: 5px;
+}

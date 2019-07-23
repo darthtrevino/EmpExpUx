@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
 import { Icon } from 'office-ui-fabric-react'
-import styled from 'styled-components'
 import posed from 'react-pose'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'

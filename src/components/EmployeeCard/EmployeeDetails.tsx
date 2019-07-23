@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import styled from 'styled-components'
 import { Employee } from '../../api'
 import { TagAttribute } from './TagAttribute'
 import { NumericAttribute } from './NumericAttribute'
+import styles from './Attributes.module.scss'
 
 interface EmployeeDetailsProps {
 	employee: Employee
@@ -11,7 +11,7 @@ interface EmployeeDetailsProps {
 export const EmployeeDetails: React.FC<EmployeeDetailsProps> = memo(
 	({ employee }) => {
 		return (
-			<AttributesPane>
+			<div className={styles.attributesPane}>
 				<TagAttribute name="Projects" value={employee.projects} />
 				<TagAttribute name="Skills" value={employee.skills} />
 				<TagAttribute name="Topics" value={employee.topics} />
@@ -30,13 +30,7 @@ export const EmployeeDetails: React.FC<EmployeeDetailsProps> = memo(
 					value={employee.pageRank * 100}
 					color="gold"
 				/>
-			</AttributesPane>
+			</div>
 		)
 	},
 )
-
-const AttributesPane = styled.div`
-	padding: 50px;
-	margin-left: 50px;
-	margin-right: 50px;
-`
