@@ -1,13 +1,23 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import styled from 'styled-components'
 import { Navigation } from './Navigation'
 import { Routes } from './Routes'
-import './App.css'
+import store from '../../state'
 
 const App: React.FC = () => (
-	<div className="App">
-		<Navigation />
-		<Routes />
-	</div>
+	<Provider store={store}>
+		<Container>
+			<Navigation />
+			<Routes />
+		</Container>
+	</Provider>
 )
 
 export default App
+
+const Container = styled.div`
+	text-align: center;
+	flex: 1;
+	display: flex;
+`
