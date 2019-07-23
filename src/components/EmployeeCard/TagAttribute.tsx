@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-	AttributeContainer,
-	AttributeName,
-	AttributeValue,
-} from './AttributeName'
+import { AttributeContainer, AttributeName, AttributeValue } from './common'
 
 export interface TagAttributeProps {
 	name: string
