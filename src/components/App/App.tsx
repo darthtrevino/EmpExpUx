@@ -4,15 +4,13 @@ import styled from 'styled-components'
 import { Routes } from './Routes'
 import store from '../../state'
 
-const App: React.FC = memo(() => (
+export const App: React.FC = memo(() => (
 	<Provider store={store}>
 		<Container>
 			<Routes />
 		</Container>
 	</Provider>
 ))
-
-export default App
 
 const Container = styled.div`
 	text-align: center;
