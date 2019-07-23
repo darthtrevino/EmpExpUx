@@ -23,12 +23,9 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 
 		const [interacted, markInteracted] = useTripwire()
 		const [expanded, setExpanded] = useState(true)
-		const [employeeFunction, setFunction] = useState<string | undefined>(
-			undefined,
-		)
-		const [organization, setOrganization] = useState<string | undefined>(
-			undefined,
-		)
+		const [employeeFunction, setFunction] = useState<string | undefined>()
+		const [organization, setOrganization] = useState<string | undefined>()
+		const [region, setRegion] = useState<string | undefined>()
 		const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 		const [selectedProjects, setSelectedProjects] = useState<Project[]>([])
 		const [selectedTopics, setSelectedTopics] = useState<Topic[]>([])
@@ -42,6 +39,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 				onFilterChange(
 					buildFilter(
 						employeeFunction,
+						region,
 						organization,
 						selectedSkills,
 						selectedProjects,
@@ -55,6 +53,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 		}, [
 			interacted,
 			employeeFunction,
+			region,
 			organization,
 			selectedSkills,
 			selectedProjects,
@@ -68,6 +67,14 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 				markInteracted()
 			},
 			[setFunction, markInteracted],
+		)
+
+		const handleRegionChanged = useCallback(
+			r => {
+				setRegion(r)
+				markInteracted()
+			},
+			[setRegion, markInteracted],
 		)
 
 		const handleOrganizationChanged = useCallback(
@@ -117,6 +124,10 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 							<FilterSection>
 								<FilterBy>Function</FilterBy>
 								<TextFilter onSelectionChanged={handleFunctionChanged} />
+							</FilterSection>
+							<FilterSection>
+								<FilterBy>Region</FilterBy>
+								<TextFilter onSelectionChanged={handleRegionChanged} />
 							</FilterSection>
 							<FilterSection>
 								<FilterBy>Organization</FilterBy>

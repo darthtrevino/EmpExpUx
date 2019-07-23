@@ -10,6 +10,7 @@ import {
 
 export function buildFilter(
 	employeeFunction: string | undefined,
+	region: string | undefined,
 	organization: string | undefined,
 	selectedSkills: Skill[],
 	selectedProjects: Project[],
@@ -44,6 +45,13 @@ export function buildFilter(
 			op: FilterOperation.Equals,
 			field: EmployeeFields.Function,
 			value: employeeFunction,
+		})
+	}
+	if (region) {
+		result.clauses.push({
+			op: FilterOperation.Equals,
+			field: EmployeeFields.Region,
+			value: region,
 		})
 	}
 	if (organization) {
