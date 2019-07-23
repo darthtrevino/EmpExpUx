@@ -8,7 +8,7 @@ export interface PageProps {
 export const Page: React.FC<PageProps> = memo(({ name, children }) => (
 	<div className={styles.pageContainer}>
 		<Helmet>
-			<title>EmpExp - {name}</title>
+			<title>{name}</title>
 		</Helmet>
 		<div className={styles.contentCnt}>{children}</div>
 	</div>
