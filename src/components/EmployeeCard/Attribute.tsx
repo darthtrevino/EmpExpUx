@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { AttributeContainer, AttributeName, AttributeValue } from './common'
+import styles from './Attributes.module.scss'
 
 export interface AttributeProps {
 	name: string
@@ -7,8 +7,8 @@ export interface AttributeProps {
 }
 
 export const Attribute: React.FC<AttributeProps> = memo(({ name, value }) => (
-	<AttributeContainer>
-		<AttributeName>{name}</AttributeName>
-		<AttributeValue>{value}</AttributeValue>
-	</AttributeContainer>
+	<div className={styles.attributeContainer}>
+		<div className={styles.attributeName}>{name}</div>
+		<div className={styles.attributeValue}>{value}</div>
+	</div>
 ))
