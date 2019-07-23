@@ -40,9 +40,29 @@ export interface Employee {
 	 */
 	topics: Topic[]
 
+	/**
+	 * The employee's eigenvector centrality
+	 * https://en.wikipedia.org/wiki/Eigenvector_centrality
+	 */
 	eigenCentrality: number
+
+	/**
+	 * The employee's betweenness centrality
+	 * https://en.wikipedia.org/wiki/Betweenness_centrality
+	 *
+	 */
 	betweenness: number
+
+	/**
+	 * The employee's pagerank
+	 * https://en.wikipedia.org/wiki/PageRank
+	 */
 	pageRank: number
+
+	/**
+	 * The ExpertScore of this user, indicating how well they respond to requests
+	 */
+	rewardPoints: number
 }
 
 export type Skill = string
