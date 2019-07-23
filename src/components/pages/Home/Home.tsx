@@ -1,12 +1,15 @@
 import React, { memo } from 'react'
 import { Page } from '../../Page'
-import styles from './Home.module.scss'
+import { Login } from './Login'
+import { useCurrentUser } from '../../../hooks/useCurrentUser'
 
 export const Home: React.FC = memo(() => {
+	const currentUser = useCurrentUser()
+
 	return (
 		<Page name="Home">
-			<div className={styles.myDiv}>This should be red</div>
-			<div>content</div>
+			<div>Current User: {currentUser ? currentUser : 'Not Logged In'}</div>
+			<Login />
 		</Page>
 	)
 })
