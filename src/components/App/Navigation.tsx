@@ -14,7 +14,7 @@ export const Navigation: React.FC<any> = memo(
 		return (
 			<Nav
 				onLinkClick={handleLinkClick}
-				selectedKey="find-experts"
+				selectedKey={pathToKeyMap[history.location.pathname]}
 				expandButtonAriaLabel="Expand or collapse"
 				styles={styles}
 				groups={NavigationGroups}
@@ -34,35 +34,18 @@ const styles: Record<string, React.CSSProperties> = {
 }
 
 type NavLinkGroup = { links: INavLink[] }[]
-const NavigationGroups: NavLinkGroup = [
-	{
-		links: [
-			{
-				name: 'Home',
-				url: '/',
-				key: 'home',
-			},
-			{
-				name: 'Find Experts',
-				url: '/experts',
-				key: 'experts',
-			},
-			{
-				name: 'Find Influencers',
-				url: '/influencers',
-				key: 'influencers',
-			},
+const pathToKeyMap: Record<string, string> = {}
 
-			{
-				name: 'Skills Marketplace',
-				url: '/skills-marketplace',
-				key: 'skill-marketplace',
-			},
-			{
-				name: 'My Expertise',
-				url: '/profile',
-				key: 'profile',
-			},
-		],
-	},
-]
+const NavigationGroups: NavLinkGroup = [{ links: [] }]
+
+const registerPath = (name: string, key: string, url?: string) => {
+	url = url ? url : `/${key}`
+	NavigationGroups[0].links.push({ name, key, url })
+	pathToKeyMap[url] = key
+}
+
+registerPath('Home', 'home', '/')
+registerPath('Find Experts', 'experts')
+registerPath('Find Influencers', 'influencers')
+registerPath('Skills Marketplace', 'skills-marketplace')
+registerPath('My Expertise', 'profile')

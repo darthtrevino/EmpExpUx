@@ -5,21 +5,11 @@ export interface PageProps {
 	name: string
 }
 export const Page: React.FC<PageProps> = memo(({ name, children }) => (
-	<PageContainer>
-		<Title>{name}</Title>
-		{children}
-	</PageContainer>
+	<PageContainer>{children}</PageContainer>
 ))
 
 const PageContainer = styled.div`
 	flex-direction: column;
 	min-height: 100%;
 	overflow: scroll;
-`
-
-const Title = styled.div`
-	font-size: 30px;
-	text-align: left;
-	margin-top: 15px;
-	font-weight: 300;
 `
