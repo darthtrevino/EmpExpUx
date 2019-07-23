@@ -9,8 +9,6 @@ import {
 } from '../../../api'
 
 export function buildFilter(
-	employeeFunction: string | undefined,
-	region: string | undefined,
 	organization: string | undefined,
 	selectedSkills: Skill[],
 	selectedProjects: Project[],
@@ -40,20 +38,6 @@ export function buildFilter(
 		],
 	}
 
-	if (employeeFunction) {
-		result.clauses.push({
-			op: FilterOperation.Equals,
-			field: EmployeeFields.Function,
-			value: employeeFunction,
-		})
-	}
-	if (region) {
-		result.clauses.push({
-			op: FilterOperation.Equals,
-			field: EmployeeFields.Region,
-			value: region,
-		})
-	}
 	if (organization) {
 		result.clauses.push({
 			op: FilterOperation.Equals,

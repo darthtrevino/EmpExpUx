@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@types/classnames": "^2.2.9",
 		"@types/lodash": "^4.14.136",
 		"@types/node": "^12.6.8",
 		"@types/query-string": "^6.3.0",
@@ -16,7 +17,7 @@
 		"@types/redux-actions": "^2.6.1",
 		"@types/redux-logger": "^3.0.7",
 		"@types/redux-thunk": "^2.1.0",
-		"@types/styled-components": "^4.1.18",
+		"classnames": "^2.2.6",
 		"humanhash": "^1.0.4",
 		"install": "^0.13.0",
 		"lodash": "^4.17.15",
@@ -36,8 +37,7 @@
 		"redux": "^4.0.4",
 		"redux-actions": "^2.6.5",
 		"redux-logger": "^3.0.6",
-		"redux-thunk": "^2.3.0",
-		"styled-components": "^4.3.2"
+		"redux-thunk": "^2.3.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",

@@ -1,7 +1,5 @@
 import React, { memo } from 'react'
-
-// @ts-ignore
-import styled from 'styled-components'
+import styles from './TextFilter.module.scss'
 
 export interface TextFilterProps {
 	onSelectionChanged: (selection: string) => void
@@ -9,17 +7,11 @@ export interface TextFilterProps {
 
 export const TextFilter: React.FC<TextFilterProps> = memo(
 	({ onSelectionChanged }) => (
-		<Container>
+		<div className={styles.container}>
 			<input
 				type="text"
 				onChange={evt => onSelectionChanged(evt.target.value)}
 			></input>
-		</Container>
+		</div>
 	),
 )
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 10px;
-`

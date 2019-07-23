@@ -7,8 +7,9 @@ import {
 	IPersonaProps,
 	PersonaPresence,
 } from 'office-ui-fabric-react'
-import styled from 'styled-components'
 import { Employee } from '../../api'
+import styles from './EmployeeInfo.module.scss'
+
 const HumanHash = require('humanhash')
 const hh = new HumanHash()
 
@@ -17,7 +18,6 @@ interface EmployeeInfoProps {
 	expanded: boolean
 	onToggleExpanded: () => void
 }
-console.log('HW', hh)
 
 export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 	({ employee, expanded, onToggleExpanded }) => {
@@ -37,7 +37,7 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 		const onRenderSecondaryText = useCallback(
 			(props: IPersonaProps): JSX.Element => (
 				<div>
-					<RoleIcon iconName={'Suitcase'} />
+					<Icon className={styles.roleIcon} iconName={'Suitcase'} />
 					{props.secondaryText}
 				</div>
 			),
@@ -45,17 +45,18 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 		)
 
 		return (
-			<Row>
+			<div className={styles.row}>
 				<Persona
 					{...personaData}
 					size={PersonaSize.size72}
 					onRenderSecondaryText={onRenderSecondaryText as any}
 				/>
-				<ExpandIcon
+				<Icon
+					className={styles.expandIcon}
 					iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
 					onClick={onToggleExpanded}
 				/>
-			</Row>
+			</div>
 		)
 	},
 )
@@ -63,16 +64,3 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 // For demo only
 const randPresense = () =>
 	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
-
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-`
-
-const ExpandIcon = styled(Icon)`
-	cursor: default;
-`
-const RoleIcon = styled(Icon)`
-	margin-right: 5px;
-`

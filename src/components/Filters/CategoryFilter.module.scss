@@ -1,0 +1,15 @@
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.rowRight {
+	@extend .row;
+	justify-content: flex-end;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+}

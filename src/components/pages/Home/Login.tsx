@@ -31,7 +31,6 @@ export const Login: React.FC<LoginProps> = () => {
 	return (
 		<div>
 			<div className={styles.flexRowCnt}>
-				{/* <div className={styles.flexGap} /> */}
 				<div className={styles.flexCentered}>
 					<div className={styles.textfieldCnt}>
 						<ComboBox
@@ -49,7 +48,6 @@ export const Login: React.FC<LoginProps> = () => {
 						/>
 					</div>
 				</div>
-				{/* <div className={styles.flexGap} /> */}
 			</div>
 		</div>
 	)

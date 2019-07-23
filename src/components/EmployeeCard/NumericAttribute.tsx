@@ -1,6 +1,5 @@
 import React, { memo, useMemo } from 'react'
-import styled from 'styled-components'
-import { AttributeContainer, AttributeName, AttributeValue } from './common'
+import styles from './Attributes.module.scss'
 
 export interface NumericAttributeProps {
 	name: string
@@ -18,34 +17,15 @@ export const NumericAttribute: React.FC<NumericAttributeProps> = memo(
 			[value, color],
 		)
 		return (
-			<AttributeContainer>
-				<AttributeName>{name}</AttributeName>
-				<MetricAttribute>
-					<MetricText>{value}</MetricText>
-					<MetricBack>
-						<MetricBar style={barStyle} />
-					</MetricBack>
-				</MetricAttribute>
-			</AttributeContainer>
+			<div className={styles.attributeContainer}>
+				<div className={styles.attributeName}>{name}</div>
+				<div className={styles.metricAttribute}>
+					<div className={styles.metricText}>{value}</div>
+					<div className={styles.metricBack}>
+						<div className={styles.metricBar} style={barStyle} />
+					</div>
+				</div>
+			</div>
 		)
 	},
 )
-
-const MetricText = styled.div`
-	position: absolute;
-	right: 5px;
-`
-const MetricAttribute = styled(AttributeValue)`
-	align-items: center;
-	display: flex;
-	position: relative;
-`
-
-const MetricBack = styled.div`
-	width: 100%;
-	height: 3px;
-`
-
-const MetricBar = styled.div`
-	height: 100%;
-`

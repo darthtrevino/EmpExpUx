@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { AttributeContainer, AttributeName, AttributeValue } from './common'
+import styles from './Attributes.module.scss'
 
 export interface TagAttributeProps {
 	name: string
@@ -8,9 +8,9 @@ export interface TagAttributeProps {
 
 export const TagAttribute: React.FC<TagAttributeProps> = memo(
 	({ name, value }) => (
-		<AttributeContainer>
-			<AttributeName>{name}</AttributeName>
-			<AttributeValue>{value.join(', ')}</AttributeValue>
-		</AttributeContainer>
+		<div className={styles.attributeContainer}>
+			<div className={styles.attributeName}>{name}</div>
+			<div className={styles.attributeValue}>{value.join(', ')}</div>
+		</div>
 	),
 )

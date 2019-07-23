@@ -2,10 +2,11 @@ import React, { useState, useMemo, useCallback, useEffect, memo } from 'react'
 
 // @ts-ignore
 import ReactTags from 'react-tag-autocomplete'
+import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
 import 'react-tag-autocomplete/'
-import styled from 'styled-components'
 import './react-tags.css'
 import { useTripwire } from '../../hooks/useTripwire'
+import styles from './CategoryFilter.module.scss'
 
 interface CategorySelection {
 	id: string
@@ -65,9 +66,14 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 			[selectedOption, handleAdd],
 		)
 
+		const comboBoxOptions = useMemo(
+			() => categories.map(c => ({ key: c, text: c })),
+			[categories],
+		)
+
 		return (
-			<Container>
-				<Row>
+			<div className={styles.container}>
+				<div className={styles.row}>
 					<ReactTags
 						tags={selected}
 						suggestions={suggestions}
@@ -75,45 +81,20 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 						onAddition={handleAdd}
 						placeholder="Add category"
 					/>
-				</Row>
-				<RowRight>
-					<CategoryOption onChange={evt => setSelectedOption(evt.target.value)}>
-						{categories.map(c => (
-							<option key={c} value={c}>
-								{c}
-							</option>
-						))}
-					</CategoryOption>
-					<CategoryButton onClick={handleButtonClick}>Add</CategoryButton>
-				</RowRight>
-			</Container>
+				</div>
+				<div className={styles.rowRight}>
+					<ComboBox
+						selectedKey={selectedOption}
+						options={comboBoxOptions}
+						onChange={(props, item) => {
+							if (item && item.key) {
+								setSelectedOption(item.key as string)
+							}
+						}}
+					></ComboBox>
+					<PrimaryButton onClick={handleButtonClick}>Add</PrimaryButton>
+				</div>
+			</div>
 		)
 	},
 )
-
-const CategoryOption = styled.select`
-	width: 200px;
-	height: 25px;
-	margin: 5px 5px 5px 0;
-`
-
-const CategoryButton = styled.button`
-	height: 25px;
-	margin: 5px 0 5px 0;
-	border-radius: 5px;
-`
-
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-`
-
-const RowRight = styled(Row)`
-	justify-content: flex-end;
-`
-
-const Container = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin: 10px;
-`

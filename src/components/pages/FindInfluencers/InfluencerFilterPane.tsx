@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
 import { Icon } from 'office-ui-fabric-react'
-import styled from 'styled-components'
 import posed from 'react-pose'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
@@ -10,6 +9,8 @@ import { RangeFilter } from '../../Filters/RangeFilter'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
 import { buildFilter } from '../FindExperts/buildFilter'
 import { useTripwire } from '../../../hooks/useTripwire'
+import styles from './InfluencerFilterPane.module.scss'
+import classnames from 'classnames'
 
 export interface InfluencerFilterPaneProps {
 	onFilterChange: (expr: FilterExpression) => void
@@ -41,8 +42,6 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 			if (interacted) {
 				onFilterChange(
 					buildFilter(
-						undefined,
-						undefined,
 						undefined,
 						selectedSkills,
 						selectedProjects,
@@ -113,102 +112,69 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 		)
 
 		return (
-			<Container className="ms-depth-8">
-				<Header>
-					<HeaderText>Search Criteria</HeaderText>
-					<HeaderIcon
+			<div className={classnames(styles.container, 'ms-depth-8')}>
+				<div className={styles.header}>
+					<div className={styles.headerText}>Search Criteria</div>
+					<Icon
 						iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
+						className={styles.headerIcon}
 						onClick={toggleExpanded}
-					></HeaderIcon>
-				</Header>
+					></Icon>
+				</div>
 				<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
 					{expanded ? (
 						<>
-							<FilterSection>
-								<FilterBy>Eigen Centrality</FilterBy>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Eigen Centrality</div>
 								<RangeFilter
 									range={eigenRange}
 									onSelectionChanged={handleEigenChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Betweenness</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Betweenness</div>
 								<RangeFilter
 									range={betweennessRange}
 									onSelectionChanged={handleBetweennessChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>PageRank</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>PageRank</div>
 								<RangeFilter
 									range={pageRankRange}
 									onSelectionChanged={handlePageRankChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Relevant Skills</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Relevant Skills</div>
 								<CategoryFilter
 									categories={skills}
 									onSelectionChanged={handleSkillsChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Project Involvement</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Project Involvement</div>
 								<CategoryFilter
 									categories={projects}
 									onSelectionChanged={handleProjectsChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Topics of Expertise</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Topics of Expertise</div>
 								<CategoryFilter
 									categories={topics}
 									onSelectionChanged={handleTopicsChanged}
 								/>
-							</FilterSection>
+							</div>
 						</>
 					) : null}
 				</FilterArea>
-			</Container>
+			</div>
 		)
 	},
 )
-
-const FilterSection = styled.div`
-	padding: 15px;
-`
 
 const FilterArea = posed.div({
 	collapsed: { height: 1, opacity: 0 },
 	expanded: { height: 'auto', opacity: 1 },
 })
-
-const Header = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-
-const HeaderIcon = styled(Icon)`
-	margin-right: 10px;
-	margin-top: 10px;
-	font-size: 30px;
-	cursor: default;
-`
-
-const HeaderText = styled.div`
-	text-align: left;
-	font-size: 25px;
-	margin: 8px;
-	font-weight: 300;
-`
-
-const FilterBy = styled.div`
-	text-align: left;
-	margin-left: 10px;
-	font-weight: 400;
-`
-
-const Container = styled.div`
-	margin-top: 10px;
-	width: 500px;
-`
