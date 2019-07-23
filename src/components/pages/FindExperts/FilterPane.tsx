@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { Icon } from 'office-ui-fabric-react'
 import styled from 'styled-components'
+import posed from 'react-pose'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { useTopics } from '../../../hooks/useTopics'
@@ -100,27 +101,29 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 					onClick={toggleExpanded}
 				></HeaderIcon>
 			</Header>
-			<FilterSection>
-				<FilterBy>Relevant Skills</FilterBy>
-				<CategoryFilter
-					categories={skills}
-					onSelectionChanged={handleSkillsChanged}
-				/>
-			</FilterSection>
-			<FilterSection>
-				<FilterBy>Project Involvement</FilterBy>
-				<CategoryFilter
-					categories={projects}
-					onSelectionChanged={handleProjectsChanged}
-				/>
-			</FilterSection>
-			<FilterSection>
-				<FilterBy>Topics of Expertise</FilterBy>
-				<CategoryFilter
-					categories={topics}
-					onSelectionChanged={handleTopicsChanged}
-				/>
-			</FilterSection>
+			<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
+				<FilterSection>
+					<FilterBy>Relevant Skills</FilterBy>
+					<CategoryFilter
+						categories={skills}
+						onSelectionChanged={handleSkillsChanged}
+					/>
+				</FilterSection>
+				<FilterSection>
+					<FilterBy>Project Involvement</FilterBy>
+					<CategoryFilter
+						categories={projects}
+						onSelectionChanged={handleProjectsChanged}
+					/>
+				</FilterSection>
+				<FilterSection>
+					<FilterBy>Topics of Expertise</FilterBy>
+					<CategoryFilter
+						categories={topics}
+						onSelectionChanged={handleTopicsChanged}
+					/>
+				</FilterSection>
+			</FilterArea>
 		</Container>
 	)
 }
@@ -128,6 +131,11 @@ export const FilterPane: React.FC<FilterPaneProps> = ({ onFilterChange }) => {
 const FilterSection = styled.div`
 	padding: 15px;
 `
+
+const FilterArea = posed.div({
+	collapsed: { opacity: 0, height: 1 },
+	expanded: { opacity: 1, height: 'auto' },
+})
 
 const Header = styled.div`
 	display: flex;
