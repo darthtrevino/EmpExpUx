@@ -6,7 +6,6 @@ export interface PageProps {
 }
 export const Page: React.FC<PageProps> = memo(({ name, children }) => (
 	<div className={styles.pageContainer}>
-		<div className={styles.titleCnt}>{name}</div>
 		<div className={styles.contentCnt}>{children}</div>
 	</div>
 ))
