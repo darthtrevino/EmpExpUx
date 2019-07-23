@@ -31,5 +31,4 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 const Container = styled.div`
 	margin: 20px;
 	padding: 15px;
-	text-align: left;
 `

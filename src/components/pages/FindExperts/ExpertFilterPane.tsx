@@ -23,9 +23,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 
 		const [interacted, markInteracted] = useTripwire()
 		const [expanded, setExpanded] = useState(true)
-		const [employeeFunction, setFunction] = useState<string | undefined>()
 		const [organization, setOrganization] = useState<string | undefined>()
-		const [region, setRegion] = useState<string | undefined>()
 		const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 		const [selectedProjects, setSelectedProjects] = useState<Project[]>([])
 		const [selectedTopics, setSelectedTopics] = useState<Topic[]>([])
@@ -38,8 +36,8 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 			if (interacted) {
 				onFilterChange(
 					buildFilter(
-						employeeFunction,
-						region,
+						undefined,
+						undefined,
 						organization,
 						selectedSkills,
 						selectedProjects,
@@ -52,30 +50,12 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 			}
 		}, [
 			interacted,
-			employeeFunction,
-			region,
 			organization,
 			selectedSkills,
 			selectedProjects,
 			selectedTopics,
 			onFilterChange,
 		])
-
-		const handleFunctionChanged = useCallback(
-			f => {
-				setFunction(f)
-				markInteracted()
-			},
-			[setFunction, markInteracted],
-		)
-
-		const handleRegionChanged = useCallback(
-			r => {
-				setRegion(r)
-				markInteracted()
-			},
-			[setRegion, markInteracted],
-		)
 
 		const handleOrganizationChanged = useCallback(
 			f => {
@@ -121,14 +101,6 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 				<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
 					{expanded ? (
 						<>
-							<FilterSection>
-								<FilterBy>Function</FilterBy>
-								<TextFilter onSelectionChanged={handleFunctionChanged} />
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Region</FilterBy>
-								<TextFilter onSelectionChanged={handleRegionChanged} />
-							</FilterSection>
 							<FilterSection>
 								<FilterBy>Organization</FilterBy>
 								<TextFilter onSelectionChanged={handleOrganizationChanged} />
