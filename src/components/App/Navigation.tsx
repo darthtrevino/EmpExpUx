@@ -43,40 +43,18 @@ export const Navigation = memo(
 	}),
 )
 
+function makeLink(name: string, url: string, icon: string): INavLink {
+	return { name, url, icon, key: url }
+}
+
 const NavigationGroups: Array<{ links: INavLink[] }> = [
 	{
 		links: [
-			{
-				name: 'Home',
-				url: '/',
-				key: '/',
-				icon: 'Home',
-			},
-			{
-				name: 'Find Experts',
-				url: '/experts',
-				key: '/experts',
-				icon: 'SearchNearby',
-			},
-			{
-				name: 'Find Influencers',
-				url: '/influencers',
-				key: '/influencers',
-				icon: 'Headset',
-			},
-
-			{
-				name: 'Skills Marketplace',
-				url: '/skills-marketplace',
-				key: '/skill-marketplace',
-				icon: 'Globe', // or Devices2
-			},
-			{
-				name: 'My Expertise',
-				url: '/profile',
-				key: '/profile',
-				icon: 'Contact',
-			},
+			makeLink('Home', '/', 'Home'),
+			makeLink('Find Experts', '/experts', 'SearchNearby'),
+			makeLink('Kudos', '/kudos', 'Medal'),
+			makeLink('Skills Marketplace', '/skills-marketplace', 'Globe'), // or Devices2
+			makeLink('My Expertise', '/profile', 'Contact'),
 		],
 	},
 ]
