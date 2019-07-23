@@ -1,0 +1,15 @@
+.pageContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.titleCnt {
+	flex: 0;
+	font-size: 36px;
+	text-align: left;
+	margin: 15px 0;
+	font-weight: 300;
+}
+.contentCnt {
+	flex: 1;
+}

@@ -1,3 +1,5 @@
+$pageHeight: calc(100vh - 50px);
+
 .appContainer {
 	display: flex;
 	flex-direction: column;
@@ -33,7 +35,7 @@
 .contentContainer {
 	flex: 1;
 	display: flex;
-	// height: calc(100vh - 50px);
+	height: $pageHeight;
 	// background-color: #900;
 	// text-align: center;
 	// flex: 1;
@@ -41,6 +43,7 @@
 }
 .pageContainer {
 	flex: 1;
+	overflow: auto;
 }
 
 /**
@@ -51,42 +54,3 @@
 	padding: 0;
 	margin: 0;
 }
-
-// $nav-color: #344b59;
-// .navContainer {
-//   background-color: $nav-color;
-//   height: 100vh;
-//   width: 280px;
-//   // min-width: 160px;
-//   .ms-Nav-link {
-//     color: #fff;
-//     font-size: 14px;
-//     font-weight: 400;
-//     line-height: 20px;
-//     padding: 25px 10px;
-//     i,
-//     &:hover i {
-//       color: #fff;
-//       font-size: 20px;
-//       padding: 0 10px 0 5px;
-//     }
-//   }
-//   .ms-Nav-compositeLink {
-//     background-color: transparent;
-//   }
-
-//   .ms-Nav-compositeLink:hover .ms-Nav-link {
-//     background-color: darken($nav-color, 10%);
-//     color: #fff;
-//   }
-//   .is-selected .ms-Nav-link {
-//     color: #ffcc03;
-//     background-color: #212838;
-//     i {
-//       color: #ffcc03;
-//     }
-//   }
-//   .ms-Nav-compositeLink.is-selected:hover .ms-Nav-link {
-//     color: #ffcc03;
-//   }
-// }
