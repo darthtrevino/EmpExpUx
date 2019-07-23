@@ -14,6 +14,9 @@ export function buildFilter(
 	selectedSkills: Skill[],
 	selectedProjects: Project[],
 	selectedTopics: Topic[],
+	eigenRange: [number, number] | undefined,
+	betweennessRange: [number, number] | undefined,
+	pageRankRange: [number, number] | undefined,
 ) {
 	const result: FilterExpression = {
 		op: BooleanOperation.AND,
@@ -49,6 +52,51 @@ export function buildFilter(
 			field: EmployeeFields.Organization,
 			value: organization,
 		})
+	}
+
+	if (eigenRange) {
+		result.clauses.push(
+			{
+				op: FilterOperation.GreaterThan,
+				field: EmployeeFields.EigenCentrality,
+				value: eigenRange[0] || 0,
+			},
+			{
+				op: FilterOperation.LessThan,
+				field: EmployeeFields.EigenCentrality,
+				value: eigenRange[1] || 1,
+			},
+		)
+
+		if (betweennessRange) {
+			result.clauses.push(
+				{
+					op: FilterOperation.GreaterThan,
+					field: EmployeeFields.Betweenness,
+					value: betweennessRange[0] || 0,
+				},
+				{
+					op: FilterOperation.LessThan,
+					field: EmployeeFields.Betweenness,
+					value: betweennessRange[1] || 1,
+				},
+			)
+		}
+
+		if (pageRankRange) {
+			result.clauses.push(
+				{
+					op: FilterOperation.GreaterThan,
+					field: EmployeeFields.PageRank,
+					value: pageRankRange[0] || 0,
+				},
+				{
+					op: FilterOperation.LessThan,
+					field: EmployeeFields.PageRank,
+					value: pageRankRange[1] || 1,
+				},
+			)
+		}
 	}
 	return result
 }

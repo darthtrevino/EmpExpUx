@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Employee } from '../../api'
 import { Attribute } from './Attribute'
 import { TagAttribute } from './TagAttribute'
+import { NumericAttribute } from './NumericAttribute'
 
 export interface EmployeeCardProps {
 	employee: Employee
@@ -20,6 +21,12 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 					<TagAttribute name="Projects" value={employee.projects} />
 					<TagAttribute name="Skills" value={employee.skills} />
 					<TagAttribute name="Topics" value={employee.topics} />
+					<NumericAttribute
+						name="Eigen Centrality"
+						value={employee.eigenCentrality}
+					/>
+					<NumericAttribute name="Betweenness" value={employee.betweenness} />
+					<NumericAttribute name="PageRank" value={employee.pageRank} />
 				</AttributesPane>
 			</Container>
 		)

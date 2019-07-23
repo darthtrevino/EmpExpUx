@@ -16,8 +16,9 @@ export const EmployeeFields: Record<string, Field> = {
 	Skills: { name: 'skills', iterable: true },
 	Projects: { name: 'projects', iterable: true },
 	Topics: { name: 'topics', iterable: true },
-	PageRank: { name: 'pagerank', numeric: true },
-	Betweennees: { name: 'betweenness', numeric: true },
+	EigenCentrality: { name: 'eigenCentrality', numeric: true },
+	PageRank: { name: 'pageRank', numeric: true },
+	Betweenness: { name: 'betweenness', numeric: true },
 }
 
 export enum FilterOperation {
@@ -31,7 +32,7 @@ export enum FilterOperation {
 export interface FieldExpression {
 	field: Field
 	op: FilterOperation
-	value: string
+	value: string | number
 }
 
 export interface BooleanExpression {

@@ -39,6 +39,10 @@ export interface Employee {
 	 * Topical areas of expertise
 	 */
 	topics: Topic[]
+
+	eigenCentrality: number
+	betweenness: number
+	pageRank: number
 }
 
 export type Skill = string

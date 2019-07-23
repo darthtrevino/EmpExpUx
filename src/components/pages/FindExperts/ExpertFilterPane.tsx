@@ -46,6 +46,9 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 						selectedSkills,
 						selectedProjects,
 						selectedTopics,
+						undefined,
+						undefined,
+						undefined,
 					),
 				)
 			}

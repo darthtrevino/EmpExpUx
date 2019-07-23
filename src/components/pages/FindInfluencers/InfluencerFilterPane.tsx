@@ -6,6 +6,7 @@ import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { useTopics } from '../../../hooks/useTopics'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
+import { RangeFilter } from '../../Filters/RangeFilter'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
 import { buildFilter } from '../FindExperts/buildFilter'
 import { useTripwire } from '../../../hooks/useTripwire'
@@ -25,6 +26,12 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 		const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 		const [selectedProjects, setSelectedProjects] = useState<Project[]>([])
 		const [selectedTopics, setSelectedTopics] = useState<Topic[]>([])
+		const [eigenRange, setEigenRange] = useState<[number, number]>([0, 1])
+		const [betweennessRange, setBetweennessRange] = useState<[number, number]>([
+			0,
+			1,
+		])
+		const [pageRankRange, setPageRankRange] = useState<[number, number]>([0, 1])
 		const toggleExpanded = useCallback(() => setExpanded(!expanded), [
 			expanded,
 			setExpanded,
@@ -39,6 +46,9 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 						selectedSkills,
 						selectedProjects,
 						selectedTopics,
+						eigenRange,
+						betweennessRange,
+						pageRankRange,
 					),
 				)
 			}
@@ -47,6 +57,9 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 			selectedSkills,
 			selectedProjects,
 			selectedTopics,
+			eigenRange,
+			betweennessRange,
+			pageRankRange,
 			onFilterChange,
 		])
 
@@ -74,6 +87,30 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 			[setSelectedTopics, markInteracted],
 		)
 
+		const handleEigenChanged = useCallback(
+			([min, max]) => {
+				setEigenRange([min, max])
+				markInteracted()
+			},
+			[setEigenRange, markInteracted],
+		)
+
+		const handleBetweennessChanged = useCallback(
+			([min, max]) => {
+				setBetweennessRange([min, max])
+				markInteracted()
+			},
+			[setBetweennessRange, markInteracted],
+		)
+
+		const handlePageRankChanged = useCallback(
+			([min, max]) => {
+				setPageRankRange([min, max])
+				markInteracted()
+			},
+			[setPageRankRange, markInteracted],
+		)
+
 		return (
 			<Container className="ms-depth-8">
 				<Header>
@@ -86,6 +123,28 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 				<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
 					{expanded ? (
 						<>
+							<FilterSection>
+								<FilterBy>Eigen Centrality</FilterBy>
+								<RangeFilter
+									range={eigenRange}
+									onSelectionChanged={handleEigenChanged}
+								/>
+							</FilterSection>
+							<FilterSection>
+								<FilterBy>Betweenness</FilterBy>
+								<RangeFilter
+									range={betweennessRange}
+									onSelectionChanged={handleBetweennessChanged}
+								/>
+							</FilterSection>
+							<FilterSection>
+								<FilterBy>PageRank</FilterBy>
+								<RangeFilter
+									range={pageRankRange}
+									onSelectionChanged={handlePageRankChanged}
+								/>
+							</FilterSection>
+							>
 							<FilterSection>
 								<FilterBy>Relevant Skills</FilterBy>
 								<CategoryFilter
