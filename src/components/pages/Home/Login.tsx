@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { ComboBox, Button } from 'office-ui-fabric-react'
+import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
 import { useAvailableUsers } from '../../../hooks/useAvailableUsers'
 import { useHandleLogin } from '../../../hooks/useHandleLogin'
 
@@ -32,12 +32,16 @@ export const Login: React.FC<LoginProps> = () => {
 		<Container>
 			<Title>Select a user to log in</Title>
 			<Row>
-				<ComboBox options={comboBoxOptions} onChange={handleComboBoxChange}>
+				<ComboBox
+					options={comboBoxOptions}
+					onChange={handleComboBoxChange}
+					selectedKey={selectedUser}
+				>
 					{users.map(u => (
 						<option key={u}>{u}</option>
 					))}
 				</ComboBox>
-				<Button onClick={handleLoginClick}>Go</Button>
+				<PrimaryButton onClick={handleLoginClick}>Go</PrimaryButton>
 			</Row>
 		</Container>
 	)
