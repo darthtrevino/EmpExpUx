@@ -42,8 +42,6 @@ export const InfluencerFilterPane: React.FC<InfluencerFilterPaneProps> = memo(
 				onFilterChange(
 					buildFilter(
 						undefined,
-						undefined,
-						undefined,
 						selectedSkills,
 						selectedProjects,
 						selectedTopics,

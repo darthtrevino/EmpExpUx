@@ -17,7 +17,6 @@ interface EmployeeInfoProps {
 	expanded: boolean
 	onToggleExpanded: () => void
 }
-console.log('HW', hh)
 
 export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 	({ employee, expanded, onToggleExpanded }) => {

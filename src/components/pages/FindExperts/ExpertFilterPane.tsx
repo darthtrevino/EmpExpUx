@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
 import { Icon } from 'office-ui-fabric-react'
-import styled from 'styled-components'
 import posed from 'react-pose'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
@@ -10,6 +9,8 @@ import { TextFilter } from '../../Filters/TextFilter'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
 import { useTripwire } from '../../../hooks/useTripwire'
 import { buildFilter } from './buildFilter'
+import classnames from 'classnames'
+import styles from './ExpertFilterPane.module.scss'
 
 export interface ExpertFilterPaneProps {
 	onFilterChange: (expr: FilterExpression) => void
@@ -36,8 +37,6 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 			if (interacted) {
 				onFilterChange(
 					buildFilter(
-						undefined,
-						undefined,
 						organization,
 						selectedSkills,
 						selectedProjects,
@@ -90,86 +89,52 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 		)
 
 		return (
-			<Container className="ms-depth-8">
-				<Header>
-					<HeaderText>Search Criteria</HeaderText>
-					<HeaderIcon
+			<div className={classnames(styles.container, 'ms-depth-8')}>
+				<div className={styles.header}>
+					<div className={styles.headerText}>Search Criteria</div>
+					<Icon
+						className={styles.headerIcon}
 						iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
 						onClick={toggleExpanded}
-					></HeaderIcon>
-				</Header>
+					/>
+				</div>
 				<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
 					{expanded ? (
 						<>
-							<FilterSection>
-								<FilterBy>Organization</FilterBy>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Organization</div>
 								<TextFilter onSelectionChanged={handleOrganizationChanged} />
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Relevant Skills</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Relevant Skills</div>
 								<CategoryFilter
 									categories={skills}
 									onSelectionChanged={handleSkillsChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Project Involvement</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Project Involvement</div>
 								<CategoryFilter
 									categories={projects}
 									onSelectionChanged={handleProjectsChanged}
 								/>
-							</FilterSection>
-							<FilterSection>
-								<FilterBy>Topics of Expertise</FilterBy>
+							</div>
+							<div className={styles.filterSection}>
+								<div className={styles.filterBy}>Topics of Expertise</div>
 								<CategoryFilter
 									categories={topics}
 									onSelectionChanged={handleTopicsChanged}
 								/>
-							</FilterSection>
+							</div>
 						</>
 					) : null}
 				</FilterArea>
-			</Container>
+			</div>
 		)
 	},
 )
-
-const FilterSection = styled.div`
-	padding: 15px;
-`
 
 const FilterArea = posed.div({
 	collapsed: { height: 1, opacity: 0 },
 	expanded: { height: 'auto', opacity: 1 },
 })
-
-const Header = styled.div`
-	display: flex;
-	justify-content: space-between;
-`
-
-const HeaderIcon = styled(Icon)`
-	margin-right: 10px;
-	margin-top: 10px;
-	font-size: 30px;
-	cursor: default;
-`
-
-const HeaderText = styled.div`
-	text-align: left;
-	font-size: 22px;
-	margin: 8px;
-	margin-left: 15px;
-	font-weight: 200;
-`
-
-const FilterBy = styled.div`
-	text-align: left;
-	margin-left: 10px;
-	font-weight: 400;
-`
-
-const Container = styled.div`
-	margin-top: 10px;
-	width: 500px;
-`
