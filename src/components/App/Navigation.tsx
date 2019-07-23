@@ -1,51 +1,80 @@
-import React, { memo, useCallback } from 'react'
-import { Nav, INavLink } from 'office-ui-fabric-react'
+import React, { memo, useCallback, useState } from 'react'
+import { IconButton, Nav, INavLink } from 'office-ui-fabric-react'
 import { withRouter } from 'react-router-dom'
+import { jsStyles } from './Navigation.styles'
 
-export const Navigation: React.FC<any> = memo(
+export const Navigation = memo(
 	withRouter(({ history }) => {
+		let [isOpen, setIsOpen] = useState(true)
+		let toggleNav = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
+		const styles = jsStyles(isOpen)
+
 		const handleLinkClick = useCallback(
-			(event: any, element: any) => {
-				event.preventDefault()
-				history.push(element.url)
+			(ev, el) => {
+				ev.preventDefault()
+				history.push(el.url)
 			},
 			[history],
 		)
+
 		return (
-			<Nav
-				onLinkClick={handleLinkClick}
-				selectedKey={pathToKeyMap[history.location.pathname]}
-				expandButtonAriaLabel="Expand or collapse"
-				styles={styles}
-				groups={NavigationGroups}
-			/>
+			<div style={styles.sidePanel}>
+				<div style={styles.navContainer}>
+					<div style={styles.toggleNavBtnCnt}>
+						<IconButton
+							title="Toggle Nav"
+							ariaLabel="Toggle Nav"
+							iconProps={{ iconName: 'GlobalNavButton' }}
+							onClick={toggleNav}
+							styles={styles.navToggleBtn as any}
+						/>
+					</div>
+					<Nav
+						selectedKey={history.location.pathname}
+						onLinkClick={handleLinkClick}
+						groups={NavigationGroups}
+						styles={styles.nav as any}
+					/>
+				</div>
+			</div>
 		)
 	}),
 )
 
-const styles: Record<string, React.CSSProperties> = {
-	root: {
-		width: 208,
-		height: 350,
-		boxSizing: 'border-box',
-		border: '1px solid #eee',
-		overflowY: 'auto',
+const NavigationGroups: Array<{ links: INavLink[] }> = [
+	{
+		links: [
+			{
+				name: 'Home',
+				url: '/',
+				key: '/',
+				icon: 'Home',
+			},
+			{
+				name: 'Find Experts',
+				url: '/experts',
+				key: '/experts',
+				icon: 'SearchNearby',
+			},
+			{
+				name: 'Find Influencers',
+				url: '/influencers',
+				key: '/influencers',
+				icon: 'Headset',
+			},
+
+			{
+				name: 'Skills Marketplace',
+				url: '/skills-marketplace',
+				key: '/skill-marketplace',
+				icon: 'Globe', // or Devices2
+			},
+			{
+				name: 'My Expertise',
+				url: '/profile',
+				key: '/profile',
+				icon: 'Contact',
+			},
+		],
 	},
-}
-
-type NavLinkGroup = { links: INavLink[] }[]
-const pathToKeyMap: Record<string, string> = {}
-
-const NavigationGroups: NavLinkGroup = [{ links: [] }]
-
-const registerPath = (name: string, key: string, url?: string) => {
-	url = url ? url : `/${key}`
-	NavigationGroups[0].links.push({ name, key, url })
-	pathToKeyMap[url] = key
-}
-
-registerPath('Home', 'home', '/')
-registerPath('Find Experts', 'experts')
-registerPath('Find Influencers', 'influencers')
-registerPath('Skills Marketplace', 'skills-marketplace')
-registerPath('My Expertise', 'profile')
+]
