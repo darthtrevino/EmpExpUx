@@ -16,6 +16,7 @@ export interface EmployeeCardProps {
 	employee: Employee
 }
 
+// For demo only
 const randPresense = () =>
 	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
 
