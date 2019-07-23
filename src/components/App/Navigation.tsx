@@ -1,14 +1,21 @@
 import React, { memo } from 'react'
 import { Nav, INavLink } from 'office-ui-fabric-react'
+import { withRouter } from 'react-router-dom'
 
-export const Navigation: React.FC = memo(() => (
-	<Nav
-		selectedKey="find-experts"
-		expandButtonAriaLabel="Expand or collapse"
-		styles={styles}
-		groups={NavigationGroups}
-	/>
-))
+export const Navigation: React.FC<any> = memo(
+	withRouter(({ history }) => (
+		<Nav
+			onLinkClick={(event: any, element: any) => {
+				event.preventDefault()
+				history.push(element.url)
+			}}
+			selectedKey="find-experts"
+			expandButtonAriaLabel="Expand or collapse"
+			styles={styles}
+			groups={NavigationGroups}
+		/>
+	)),
+)
 
 const styles: Record<string, React.CSSProperties> = {
 	root: {

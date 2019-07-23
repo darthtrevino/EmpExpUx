@@ -8,7 +8,6 @@ import store from '../../state'
 const App: React.FC = () => (
 	<Provider store={store}>
 		<Container>
-			<Navigation />
 			<Routes />
 		</Container>
 	</Provider>
