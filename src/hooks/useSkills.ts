@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import api from '../api'
 import { receiveApiSkills } from '../state/actions'
 
-export function useProjects() {
+export function useSkills() {
 	const skills = useSelector((state: State) => state.apicache.skills)
 	const dispatch = useDispatch()
 	useEffect(() => {

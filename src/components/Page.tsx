@@ -6,7 +6,7 @@ export interface PageProps {
 }
 export const Page: React.FC<PageProps> = ({ name, children }) => (
 	<PageContainer>
-		<Title text={name} />
+		<Title>{name}</Title>
 		{children}
 	</PageContainer>
 )
@@ -17,7 +17,9 @@ const PageContainer = styled.div`
 	flex-direction: column;
 `
 
-export interface TitleProps {
-	text: string
-}
-const Title: React.FC<TitleProps> = ({ text }) => <div>{text}</div>
+const Title = styled.div`
+	font-size: 36px;
+	text-align: left;
+	margin: 15px;
+	font-weight: 300;
+`

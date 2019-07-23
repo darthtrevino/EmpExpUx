@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import api from '../api'
 import { receiveApiTopics } from '../state/actions'
 
-export function useProjects() {
+export function useTopics() {
 	const topics = useSelector((state: State) => state.apicache.topics)
 	const dispatch = useDispatch()
 	useEffect(() => {
