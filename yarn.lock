@@ -5469,6 +5469,13 @@ https-proxy-agent@^2.2.1:
     agent-base "^4.3.0"
     debug "^3.1.0"
 
+humanhash@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/humanhash/-/humanhash-1.0.4.tgz#47bb842cb66f2ac49740ac6ad9cac364f4d28bea"
+  integrity sha512-fxOhEl/Ezv7PobYOTomDmQKWaSC0hk0mzl5et5McPtr+6LRBP7LYoeFLPjKW6xOSGmMNLj50BufrrgX+M5EvEA==
+  dependencies:
+    uuid "^3.3.2"
+
 humanize-ms@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/humanize-ms/-/humanize-ms-1.2.1.tgz#c46e3159a293f6b896da29316d8b6fe8bb79bbed"

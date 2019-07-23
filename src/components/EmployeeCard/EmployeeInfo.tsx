@@ -9,12 +9,15 @@ import {
 } from 'office-ui-fabric-react'
 import styled from 'styled-components'
 import { Employee } from '../../api'
+const HumanHash = require('humanhash')
+const hh = new HumanHash()
 
 interface EmployeeInfoProps {
 	employee: Employee
 	expanded: boolean
 	onToggleExpanded: () => void
 }
+console.log('HW', hh)
 
 export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 	({ employee, expanded, onToggleExpanded }) => {
@@ -22,7 +25,7 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 			() => ({
 				imageUrl: undefined,
 				imageInitials: 'AL',
-				text: employee.email,
+				text: hh.humanize(employee.email),
 				secondaryText: `${employee.function} in ${employee.organization}, ${employee.region} region`,
 				tertiaryText: 'In a meeting',
 				optionalText: 'Available at 4:00pm',
@@ -42,13 +45,7 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 		)
 
 		return (
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-				}}
-			>
+			<Row>
 				<Persona
 					{...personaData}
 					size={PersonaSize.size72}
@@ -58,7 +55,7 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 					iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
 					onClick={onToggleExpanded}
 				/>
-			</div>
+			</Row>
 		)
 	},
 )
@@ -66,6 +63,12 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 // For demo only
 const randPresense = () =>
 	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
+
+const Row = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+`
 
 const ExpandIcon = styled(Icon)`
 	cursor: default;
