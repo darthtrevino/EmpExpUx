@@ -5,7 +5,6 @@ import { FindExperts } from '../pages/FindExperts'
 import { FindInfluencers } from '../pages/FindInfluencers'
 import { SkillsMarketplace } from '../pages/SkillsMarketplace'
 import { Profile } from '../pages/Profile'
-// import { Navigation } from './Navigation'
 
 export const Routes: React.FC = memo(() => (
 	<>
