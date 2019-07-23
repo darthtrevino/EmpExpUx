@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
+
 // @ts-ignore
 import ReactTags from 'react-tag-autocomplete'
 import 'react-tag-autocomplete/'
@@ -92,12 +93,12 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
 const CategoryOption = styled.select`
 	width: 200px;
-	height: 35px;
+	height: 25px;
 	margin: 5px 5px 5px 0;
 `
 
 const CategoryButton = styled.button`
-	height: 35px;
+	height: 25px;
 	margin: 5px 0 5px 0;
 	border-radius: 5px;
 `

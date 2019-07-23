@@ -1,31 +1,18 @@
 .react-tags {
-	position: relative;
-	padding: 6px 0 0 6px;
-	border: 1px solid #d1d1d1;
-	border-radius: 1px;
+	display: flex;
+	flex-direction: row;
+	overflow-x: scroll;
 	width: 100%;
-
-	/* shared font styles */
-	font-size: 1em;
-	line-height: 1.2;
+	height: 25px;
 
 	/* clicking anywhere will focus the input */
 	cursor: text;
-}
-
-.react-tags.is-focused {
-	border-color: #b1b1b1;
-}
-
-.react-tags__selected {
-	display: inline;
 }
 
 .react-tags__selected-tag {
 	display: inline-block;
 	box-sizing: border-box;
 	margin: 0 6px 6px 0;
-	padding: 6px 8px;
 	border: 1px solid #d1d1d1;
 	border-radius: 2px;
 	background: #f1f1f1;
@@ -50,8 +37,7 @@
 	display: inline-block;
 
 	/* match tag layout */
-	padding: 7px 2px;
-	margin-bottom: 6px;
+	margin-bottom: 3px;
 
 	/* prevent autoresize overflowing the container */
 	max-width: 100%;
@@ -108,7 +94,7 @@
 
 .react-tags__suggestions li {
 	border-bottom: 1px solid #ddd;
-	padding: 6px 8px;
+	padding: 4px 4px;
 }
 
 .react-tags__suggestions li mark {
