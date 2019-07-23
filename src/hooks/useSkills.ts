@@ -9,9 +9,7 @@ export function useSkills() {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		if (skills.length === 0) {
-			api.getSkills().then(skilss => {
-				dispatch(receiveApiSkills(skilss))
-			})
+			api.getSkills().then(skills => dispatch(receiveApiSkills(skills)))
 		}
 	}, [skills, dispatch])
 

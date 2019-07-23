@@ -9,9 +9,7 @@ export function useProjects() {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		if (projects.length === 0) {
-			api.getProjects().then(projects => {
-				dispatch(receiveApiProjects(projects))
-			})
+			api.getProjects().then(projects => dispatch(receiveApiProjects(projects)))
 		}
 	}, [projects, dispatch])
 

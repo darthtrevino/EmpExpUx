@@ -9,9 +9,7 @@ export function useTopics() {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		if (topics.length === 0) {
-			api.getTopics().then(skilss => {
-				dispatch(receiveApiTopics(skilss))
-			})
+			api.getTopics().then(topics => dispatch(receiveApiTopics(topics)))
 		}
 	}, [topics, dispatch])
 

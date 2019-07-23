@@ -15,7 +15,7 @@ export const FindExperts: React.FC = () => {
 	return (
 		<Page name="Find Experts">
 			<FilterPane onFilterChange={handleFilterChanged} />
-			<div style={{ overflowY: 'scroll' }}>
+			<div>
 				<ul>
 					{matches.map(m => (
 						<EmployeeCard employee={m} />
