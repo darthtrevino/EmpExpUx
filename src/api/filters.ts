@@ -14,7 +14,6 @@ function isFieldExpression(expr: FilterExpression) {
 }
 
 function serializeFieldExpression(expr: FieldExpression) {
-	console.log('EXPR', expr.field, expr.value)
 	const value = expr.field.numeric ? `${expr.value}` : `'${expr.value}'`
 	if (expr.field.iterable) {
 		return `${expr.field.name}/any(t: t ${expr.op} ${value})`
