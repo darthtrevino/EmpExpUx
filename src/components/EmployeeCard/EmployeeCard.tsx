@@ -1,7 +1,14 @@
-import React, { memo } from 'react'
+import React, { memo, useMemo, useCallback } from 'react'
+import {
+	Persona,
+	IPersonaSharedProps,
+	PersonaSize,
+	PersonaPresence,
+	IPersonaProps,
+	Icon,
+} from 'office-ui-fabric-react'
 import styled from 'styled-components'
 import { Employee } from '../../api'
-import { Attribute } from './Attribute'
 import { TagAttribute } from './TagAttribute'
 import { NumericAttribute } from './NumericAttribute'
 
@@ -9,15 +16,42 @@ export interface EmployeeCardProps {
 	employee: Employee
 }
 
+const randPresense = () =>
+	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
+
 export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 	({ employee }) => {
+		const _onRenderSecondaryText = useCallback(
+			(props: IPersonaProps): JSX.Element => {
+				return (
+					<div>
+						<RoleIcon iconName={'Suitcase'} />
+						{props.secondaryText}
+					</div>
+				)
+			},
+			[],
+		)
+
+		const personaData: IPersonaSharedProps = useMemo(() => {
+			return {
+				imageUrl: undefined, // TestImages.personaFemale,
+				imageInitials: 'AL',
+				text: employee.email,
+				secondaryText: `${employee.function} in ${employee.organization}, ${employee.region} region`,
+				tertiaryText: 'In a meeting',
+				optionalText: 'Available at 4:00pm',
+				presence: randPresense(),
+			}
+		}, [employee])
 		return (
 			<Container className="ms-depth-8">
-				<Email>{employee.email}</Email>
+				<Persona
+					{...personaData}
+					size={PersonaSize.size72}
+					onRenderSecondaryText={_onRenderSecondaryText as any}
+				/>
 				<AttributesPane>
-					<Attribute name="Region" value={employee.region} />
-					<Attribute name="Function" value={employee.function} />
-					<Attribute name="Organization" value={employee.organization} />
 					<TagAttribute name="Projects" value={employee.projects} />
 					<TagAttribute name="Skills" value={employee.skills} />
 					<TagAttribute name="Topics" value={employee.topics} />
@@ -42,15 +76,14 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 	},
 )
 
+const RoleIcon = styled(Icon)`
+	margin-right: 5px;
+`
+
 const AttributesPane = styled.div`
 	padding: 50px;
 	margin-left: 50px;
 	margin-right: 50px;
-`
-
-const Email = styled.div`
-	font-size: 24px;
-	font-weight: 300;
 `
 
 const Container = styled.div`
