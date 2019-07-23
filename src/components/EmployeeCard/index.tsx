@@ -23,10 +23,19 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 					<TagAttribute name="Topics" value={employee.topics} />
 					<NumericAttribute
 						name="Eigen Centrality"
-						value={employee.eigenCentrality}
+						value={employee.eigenCentrality * 100}
+						color="crimson"
 					/>
-					<NumericAttribute name="Betweenness" value={employee.betweenness} />
-					<NumericAttribute name="PageRank" value={employee.pageRank} />
+					<NumericAttribute
+						name="Betweenness"
+						value={employee.betweenness * 100}
+						color="grey"
+					/>
+					<NumericAttribute
+						name="PageRank"
+						value={employee.pageRank * 100}
+						color="gold"
+					/>
 				</AttributesPane>
 			</Container>
 		)
