@@ -157,9 +157,10 @@ const HeaderIcon = styled(Icon)`
 
 const HeaderText = styled.div`
 	text-align: left;
-	font-size: 25px;
+	font-size: 22px;
 	margin: 8px;
-	font-weight: 300;
+	margin-left: 15px;
+	font-weight: 200;
 `
 
 const FilterBy = styled.div`
