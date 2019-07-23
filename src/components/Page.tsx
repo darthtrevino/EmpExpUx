@@ -18,8 +18,8 @@ const PageContainer = styled.div`
 `
 
 const Title = styled.div`
-	font-size: 36px;
+	font-size: 30px;
 	text-align: left;
-	margin: 15px;
+	margin-top: 15px;
 	font-weight: 300;
 `

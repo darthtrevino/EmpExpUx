@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import styles from './App.module.scss'
+import styles from './Header.module.scss'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 
 const brandMark = require('../../images/brandmark_white.png')
