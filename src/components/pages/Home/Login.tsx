@@ -36,11 +36,7 @@ export const Login: React.FC<LoginProps> = () => {
 					options={comboBoxOptions}
 					onChange={handleComboBoxChange}
 					selectedKey={selectedUser}
-				>
-					{users.map(u => (
-						<option key={u}>{u}</option>
-					))}
-				</ComboBox>
+				/>
 				<PrimaryButton onClick={handleLoginClick}>Go</PrimaryButton>
 			</Row>
 		</Container>
