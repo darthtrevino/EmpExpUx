@@ -88,7 +88,7 @@ const CategoryOption = styled.select`
 const CategoryButton = styled.button`
 	height: 35px;
 	margin: 5px 0 5px 0;
-	border-radius 5px;
+	border-radius: 5px;
 `
 
 const Row = styled.div`
