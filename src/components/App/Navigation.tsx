@@ -3,6 +3,8 @@ import { IconButton, Nav, INavLink } from 'office-ui-fabric-react'
 import { withRouter } from 'react-router-dom'
 import { jsStyles } from './Navigation.styles'
 
+const ICON_PROPS = { iconName: 'GlobalNavButton' }
+
 export const Navigation = memo(
 	withRouter(({ history }) => {
 		let [isOpen, setIsOpen] = useState(true)
@@ -24,7 +26,7 @@ export const Navigation = memo(
 						<IconButton
 							title="Toggle Nav"
 							ariaLabel="Toggle Nav"
-							iconProps={{ iconName: 'GlobalNavButton' }}
+							iconProps={ICON_PROPS}
 							onClick={toggleNav}
 							styles={styles.navToggleBtn as any}
 						/>
