@@ -1,0 +1,17 @@
+.flexRowCnt {
+	display: flex;
+	height: calc(100vh - 110px);
+	align-items: center;
+	justify-content: center;
+}
+.flexCentered {
+	flex: 0;
+	display: flex;
+}
+.textfieldCnt {
+	flex: 1;
+	min-width: 250px;
+}
+.btnCnt {
+	flex: 0 0 100px;
+}

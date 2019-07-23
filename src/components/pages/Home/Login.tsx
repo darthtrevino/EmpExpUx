@@ -1,8 +1,8 @@
 import React, { useMemo, useState, useCallback } from 'react'
-import styled from 'styled-components'
 import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
 import { useAvailableUsers } from '../../../hooks/useAvailableUsers'
 import { useHandleLogin } from '../../../hooks/useHandleLogin'
+import styles from './Home.module.scss'
 
 export interface LoginProps {}
 
@@ -29,31 +29,28 @@ export const Login: React.FC<LoginProps> = () => {
 		selectedUser,
 	])
 	return (
-		<Container>
-			<Title>Select a user to log in</Title>
-			<Row>
-				<ComboBox
-					options={comboBoxOptions}
-					onChange={handleComboBoxChange}
-					selectedKey={selectedUser}
-				/>
-				<PrimaryButton onClick={handleLoginClick}>Go</PrimaryButton>
-			</Row>
-		</Container>
+		<div>
+			<div className={styles.flexRowCnt}>
+				{/* <div className={styles.flexGap} /> */}
+				<div className={styles.flexCentered}>
+					<div className={styles.textfieldCnt}>
+						<ComboBox
+							label="Select a user to log in"
+							options={comboBoxOptions}
+							onChange={handleComboBoxChange}
+							selectedKey={selectedUser}
+						/>
+					</div>
+					<div className={styles.btnCnt}>
+						<PrimaryButton
+							text="Go"
+							onClick={handleLoginClick}
+							styles={{ root: { marginTop: '29px' } }}
+						/>
+					</div>
+				</div>
+				{/* <div className={styles.flexGap} /> */}
+			</div>
+		</div>
 	)
 }
-
-const Container = styled.div`
-	margin-top: 40px;
-`
-
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-	margin-top: 10px;
-`
-
-const Title = styled.div`
-	font-size: 16px;
-	font-weight: 300;
-`
