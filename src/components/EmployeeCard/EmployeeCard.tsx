@@ -1,16 +1,8 @@
-import React, { memo, useMemo, useCallback } from 'react'
-import {
-	Persona,
-	IPersonaSharedProps,
-	PersonaSize,
-	PersonaPresence,
-	IPersonaProps,
-	Icon,
-} from 'office-ui-fabric-react'
+import React, { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { Employee } from '../../api'
-import { TagAttribute } from './TagAttribute'
-import { NumericAttribute } from './NumericAttribute'
+import { EmployeeDetails } from './EmployeeDetails'
+import { EmployeeInfo } from './EmployeeInfo'
 
 export interface EmployeeCardProps {
 	employee: Employee
@@ -18,72 +10,23 @@ export interface EmployeeCardProps {
 
 export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 	({ employee }) => {
-		const onRenderSecondaryText = useCallback(
-			(props: IPersonaProps): JSX.Element => (
-				<div>
-					<RoleIcon iconName={'Suitcase'} />
-					{props.secondaryText}
-				</div>
-			),
-			[],
-		)
-
-		const personaData: IPersonaSharedProps = useMemo(() => {
-			return {
-				imageUrl: undefined, // TestImages.personaFemale,
-				imageInitials: 'AL',
-				text: employee.email,
-				secondaryText: `${employee.function} in ${employee.organization}, ${employee.region} region`,
-				tertiaryText: 'In a meeting',
-				optionalText: 'Available at 4:00pm',
-				presence: randPresense(),
-			}
-		}, [employee])
+		const [expanded, setExpanded] = useState(false)
+		const toggleExpanded = useCallback(() => setExpanded(!expanded), [
+			expanded,
+			setExpanded,
+		])
 		return (
 			<Container className="ms-depth-8">
-				<Persona
-					{...personaData}
-					size={PersonaSize.size72}
-					onRenderSecondaryText={onRenderSecondaryText as any}
+				<EmployeeInfo
+					employee={employee}
+					expanded={expanded}
+					onToggleExpanded={toggleExpanded}
 				/>
-				<AttributesPane>
-					<TagAttribute name="Projects" value={employee.projects} />
-					<TagAttribute name="Skills" value={employee.skills} />
-					<TagAttribute name="Topics" value={employee.topics} />
-					<NumericAttribute
-						name="Eigen Centrality"
-						value={employee.eigenCentrality * 100}
-						color="crimson"
-					/>
-					<NumericAttribute
-						name="Betweenness"
-						value={employee.betweenness * 100}
-						color="grey"
-					/>
-					<NumericAttribute
-						name="PageRank"
-						value={employee.pageRank * 100}
-						color="gold"
-					/>
-				</AttributesPane>
+				{expanded ? <EmployeeDetails employee={employee} /> : null}
 			</Container>
 		)
 	},
 )
-
-// For demo only
-const randPresense = () =>
-	(1 + Math.floor(Math.random() * 6.5)) as PersonaPresence
-
-const RoleIcon = styled(Icon)`
-	margin-right: 5px;
-`
-
-const AttributesPane = styled.div`
-	padding: 50px;
-	margin-left: 50px;
-	margin-right: 50px;
-`
 
 const Container = styled.div`
 	margin: 20px;
