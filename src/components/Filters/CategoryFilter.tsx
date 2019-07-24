@@ -5,11 +5,12 @@ import styles from './CategoryFilter.module.scss'
 export interface CategoryFilterProps {
 	categories: string[]
 	selectedCategories: string[]
+	itemLimit?: number
 	onSelectionChanged: (selection: string[]) => void
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
-	({ categories, selectedCategories, onSelectionChanged }) => {
+	({ categories, selectedCategories, itemLimit = 5, onSelectionChanged }) => {
 		const suggestions = useMemo<ITag[]>(() => categories.map(toTag), [
 			categories,
 		])
@@ -46,7 +47,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
 							suggestionsHeaderText: 'Suggested Skils',
 							noResultsFoundText: 'No Skills Found',
 						}}
-						itemLimit={5}
+						itemLimit={itemLimit}
 						onChange={handleTagsChanged}
 					/>
 				</div>
