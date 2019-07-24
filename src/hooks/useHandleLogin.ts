@@ -11,6 +11,9 @@ export function useHandleLogin() {
 		(login: string) => {
 			// set the current user in local storagen
 			setCurrentUser(login)
+			api.getExpertConnections(login).then(requests => {
+				console.log('Connection Requests', requests)
+			})
 			api.getEmployees().then(employees => {
 				const found = employees.find(e => e.email === login)
 				if (found) {
