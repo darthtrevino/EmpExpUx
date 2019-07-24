@@ -8,6 +8,7 @@
 	font-size: 12px;
 	font-weight: bold;
 	flex: 1;
+	max-width: 40%;
 }
 
 .attributeContainer {
@@ -20,6 +21,7 @@
 	font-size: 12px;
 	flex: 4;
 	flex-wrap: wrap;
+	max-width: 60%;
 }
 
 .metricAttribute {
