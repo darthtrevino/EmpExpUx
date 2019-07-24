@@ -1,0 +1,35 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 15px;
+	margin-bottom: 15px;
+	width: 60%;
+}
+
+.data {
+	padding: 25px;
+}
+
+.accepted {
+}
+
+.nonAccepted {
+	background-color: #ebb1c4;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.messageContainer {
+	padding: 20px;
+}
+
+.status {
+	font-weight: bold;
+	font-size: 12px;
+}

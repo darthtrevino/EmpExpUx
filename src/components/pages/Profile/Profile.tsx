@@ -5,11 +5,11 @@ import { Pivot, PivotItem } from 'office-ui-fabric-react'
 import { State } from '../../../state/reducers'
 import { IncomingConnectionRequest } from './IncomingConnectionRequest'
 import styles from './Profile.module.scss'
+import { OutgoingConnectionRequest } from './OutgoingConnectionRequest'
 
 export const Profile: React.FC = memo(() => {
 	const requestsMadeByMe = useSelector((s: State) => s.expertConnections.byMe)
-	const requestsMadeToMe = useSelector((s: State) => s.expertConnections.byMe)
-
+	const requestsMadeToMe = useSelector((s: State) => s.expertConnections.toMe)
 	return (
 		<Page name="My Expertise">
 			<div className={styles.page}>
@@ -25,7 +25,7 @@ export const Profile: React.FC = memo(() => {
 						<PivotItem headerText="Outgoing Requests">
 							<div className={styles.pivotContent}>
 								{requestsMadeByMe.map(r => (
-									<div key={r.id}>{r.id}</div>
+									<OutgoingConnectionRequest key={r.id} connection={r} />
 								))}
 							</div>
 						</PivotItem>
