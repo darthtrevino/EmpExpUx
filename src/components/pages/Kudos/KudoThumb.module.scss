@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 8px 0 8px;
+	position: relative;
+	left: 5;
+}
+
+.icon {
+	margin: 0 8px 0 8px;
+	position: absolute;
+	right: 0;
+	height: 50px;
+	width: 50px;
+}
+
+.iconBack {
+	@extend .icon;
+	color: gold;
+}
+.iconFront {
+	@extend .icon;
+	color: grey;
+}

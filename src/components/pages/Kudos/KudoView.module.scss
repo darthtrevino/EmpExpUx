@@ -1,0 +1,19 @@
+.container {
+	flex: 1;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 20px;
+	display: flex;
+}
+
+.textContainer {
+	flex: 1;
+	display: flex;
+	margin-top: 10px;
+}
+
+.kudoDetail {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
