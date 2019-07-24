@@ -6,6 +6,7 @@ import styles from './EmployeeCard.module.scss'
 import { EmployeeDetails } from './EmployeeDetails'
 import { EmployeeInfo } from './EmployeeInfo'
 import { useConnectionRequestHandler } from '../../hooks/useConnectionRequestHandler'
+import { ConnectionRequestModal } from './ConnectionReqestModal'
 
 export interface EmployeeCardProps {
 	employee: Employee
@@ -14,19 +15,24 @@ export interface EmployeeCardProps {
 export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 	({ employee }) => {
 		const [expanded, setExpanded] = useState(false)
+		const [modalOpen, setModalOpen] = useState(false)
 		const [requestSent, setRequestSent] = useState(false)
 		const toggleExpanded = useCallback(() => setExpanded(!expanded), [
 			expanded,
 			setExpanded,
 		])
 		const requestConnection = useConnectionRequestHandler()
-		const handleConnectionRequest = useCallback(() => {
-			requestConnection(
-				employee,
-				'I need help with React routing and C# API integration',
-			)
-			setRequestSent(true)
-		}, [employee, requestConnection])
+		const handleConnectionRequest = useCallback(
+			(message: string) => {
+				setModalOpen(false)
+				requestConnection(employee, message)
+				setRequestSent(true)
+			},
+			[employee, requestConnection],
+		)
+		const handleClickConnection = useCallback(() => {
+			setModalOpen(true)
+		}, [])
 
 		return (
 			<div className={classnames('ms-depth-8', styles.container)}>
@@ -36,12 +42,14 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = memo(
 					onToggleExpanded={toggleExpanded}
 				/>
 				{expanded ? <EmployeeDetails employee={employee} /> : null}
+				<ConnectionRequestModal
+					isOpen={modalOpen}
+					onDismiss={() => setModalOpen(false)}
+					onSend={handleConnectionRequest}
+				/>
 				<div className={styles.actionPane}>
-					<PrimaryButton
-						disabled={requestSent}
-						onClick={handleConnectionRequest}
-					>
-						{requestSent ? 'Request Sent!' : 'Request Connection'}
+					<PrimaryButton disabled={requestSent} onClick={handleClickConnection}>
+						{requestSent ? 'Request Sent!' : 'Write Connection Request'}
 					</PrimaryButton>
 				</div>
 			</div>
