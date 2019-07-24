@@ -10,6 +10,7 @@ import { useTripwire } from '../../../hooks/useTripwire'
 import { buildFilter } from './buildFilter'
 import classnames from 'classnames'
 import styles from './ExpertFilterPane.module.scss'
+import { ExpandCollapsePane } from '../../ExpandCollapsePane'
 
 export interface ExpertFilterPaneProps {
 	onFilterChange: (expr: FilterExpression) => void
@@ -21,14 +22,9 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 		const skills = useSkills()
 
 		const [interacted, markInteracted] = useTripwire()
-		const [expanded, setExpanded] = useState(true)
 		const [organization, setOrganization] = useState<string | undefined>()
 		const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
 		const [selectedProjects, setSelectedProjects] = useState<Project[]>([])
-		const toggleExpanded = useCallback(() => setExpanded(!expanded), [
-			expanded,
-			setExpanded,
-		])
 
 		useEffect(() => {
 			if (interacted) {
@@ -70,51 +66,34 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 
 		return (
 			<div className={classnames(styles.container, 'ms-depth-8')}>
-				<div className={styles.header}>
-					<div className={styles.headerText}>Search Criteria</div>
-					<Icon
-						className={styles.headerIcon}
-						iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
-						onClick={toggleExpanded}
-					/>
-				</div>
-				<FilterArea pose={expanded ? 'expanded' : 'collapsed'}>
-					{expanded ? (
-						<>
-							<div className={styles.filterSection}>
-								<TextField
-									label="Organization"
-									value={organization}
-									onChange={handleOrganizationChanged}
-								/>
-							</div>
-							<div className={styles.tagsContainer}>
-								<div className={styles.filterSection}>
-									<Label>Relevant Skills</Label>
-									<CategoryFilter
-										categories={skills}
-										selectedCategories={selectedSkills}
-										onSelectionChanged={handleSkillsChanged}
-									/>
-								</div>
-								<div className={styles.filterSection}>
-									<Label>Project Involvement</Label>
-									<CategoryFilter
-										categories={projects}
-										selectedCategories={selectedProjects}
-										onSelectionChanged={handleProjectsChanged}
-									/>
-								</div>
-							</div>
-						</>
-					) : null}
-				</FilterArea>
+				<ExpandCollapsePane title="SearchCriteria">
+					<div className={styles.filterSection}>
+						<TextField
+							label="Organization"
+							value={organization}
+							onChange={handleOrganizationChanged}
+						/>
+					</div>
+					<div className={styles.tagsContainer}>
+						<div className={styles.filterSection}>
+							<Label>Relevant Skills</Label>
+							<CategoryFilter
+								categories={skills}
+								selectedCategories={selectedSkills}
+								onSelectionChanged={handleSkillsChanged}
+							/>
+						</div>
+						<div className={styles.filterSection}>
+							<Label>Project Involvement</Label>
+							<CategoryFilter
+								categories={projects}
+								selectedCategories={selectedProjects}
+								onSelectionChanged={handleProjectsChanged}
+							/>
+						</div>
+					</div>
+				</ExpandCollapsePane>
 			</div>
 		)
 	},
 )
-
-const FilterArea = posed.div({
-	collapsed: { height: 1, opacity: 0 },
-	expanded: { height: 'auto', opacity: 1 },
-})
