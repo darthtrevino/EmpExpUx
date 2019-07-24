@@ -92,7 +92,7 @@ export interface ExpertConnection {
 	expertResponseMessage?: string
 	referredToEmail: string
 	responseTimeInHours: number
-	type: string
+	type?: string
 }
 
 export interface InfluencerConnection {
@@ -105,5 +105,5 @@ export interface InfluencerConnection {
 	influencerResponseStatus: string
 	influencerResponseMessage?: string
 	responseTimeInHours: number
-	type: string
+	type?: string
 }

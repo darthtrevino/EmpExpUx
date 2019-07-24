@@ -136,7 +136,7 @@ export class ServiceApi {
 		connection: ExpertConnection,
 	): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.ExpertConnection), {
-			method: HttpMethod.PUT,
+			method: HttpMethod.POST,
 			headers: JsonHeaders,
 			body: JSON.stringify(connection),
 		})
