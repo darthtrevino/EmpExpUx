@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
-import { Icon } from 'office-ui-fabric-react'
+import { Icon, Label } from 'office-ui-fabric-react'
 import posed from 'react-pose'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { useTopics } from '../../../hooks/useTopics'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
-import { TextFilter } from '../../Filters/TextFilter'
+import { TextField } from 'office-ui-fabric-react'
 import { Skill, Project, Topic, FilterExpression } from '../../../api'
 import { useTripwire } from '../../../hooks/useTripwire'
 import { buildFilter } from './buildFilter'
@@ -57,7 +57,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 		])
 
 		const handleOrganizationChanged = useCallback(
-			f => {
+			(e, f) => {
 				setOrganization(f)
 				markInteracted()
 			},
@@ -102,25 +102,29 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 					{expanded ? (
 						<>
 							<div className={styles.filterSection}>
-								<div className={styles.filterBy}>Organization</div>
-								<TextFilter onSelectionChanged={handleOrganizationChanged} />
+								{/* <Label>Organization</Label>
+								<TextFilter onSelectionChanged={handleOrganizationChanged} /> */}
+								<TextField
+									label="Organization"
+									onChange={handleOrganizationChanged}
+								/>
 							</div>
 							<div className={styles.filterSection}>
-								<div className={styles.filterBy}>Relevant Skills</div>
+								<Label>Relevant Skills</Label>
 								<CategoryFilter
 									categories={skills}
 									onSelectionChanged={handleSkillsChanged}
 								/>
 							</div>
 							<div className={styles.filterSection}>
-								<div className={styles.filterBy}>Project Involvement</div>
+								<Label>Project Involvement</Label>
 								<CategoryFilter
 									categories={projects}
 									onSelectionChanged={handleProjectsChanged}
 								/>
 							</div>
 							<div className={styles.filterSection}>
-								<div className={styles.filterBy}>Topics of Expertise</div>
+								<Label>Topics of Expertise</Label>
 								<CategoryFilter
 									categories={topics}
 									onSelectionChanged={handleTopicsChanged}

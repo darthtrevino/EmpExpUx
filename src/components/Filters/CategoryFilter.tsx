@@ -7,6 +7,7 @@ import 'react-tag-autocomplete/'
 import './react-tags.css'
 import { useTripwire } from '../../hooks/useTripwire'
 import styles from './CategoryFilter.module.scss'
+import './ReactTagsCustom.scss'
 
 interface CategorySelection {
 	id: string

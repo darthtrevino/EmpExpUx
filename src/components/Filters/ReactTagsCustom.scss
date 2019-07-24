@@ -1,0 +1,29 @@
+@import '../../styles/ColorPalette.scss';
+
+.react-tags {
+	height: auto;
+	overflow: auto;
+}
+.react-tags__selected-tag {
+	display: inline-block;
+	background-color: $mint-dark;
+	border: 0;
+	color: $neutral-white;
+	margin: 0 7px 7px 0;
+	padding: 7px 15px;
+	font-size: 13px;
+	// display: inline-block;
+	// box-sizing: border-box;
+	// margin: 0 6px 6px 0;
+	// border: 1px solid #d1d1d1;
+	// border-radius: 2px;
+	// background: #f1f1f1;
+	// font-size: inherit;
+	// line-height: inherit;
+	&::after {
+		color: $neutral-white;
+	}
+}
+.react-tags__search {
+	display: block;
+}
