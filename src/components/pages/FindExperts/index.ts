@@ -1,1 +1,1 @@
-export * from './FindExperts'
+export { FindExperts as default } from './FindExperts'

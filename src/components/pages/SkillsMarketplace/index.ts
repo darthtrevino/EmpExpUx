@@ -1,1 +1,1 @@
-export * from './SkillsMarketplace'
+export { SkillsMarketplace as default } from './SkillsMarketplace'
