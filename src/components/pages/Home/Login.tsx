@@ -1,22 +1,17 @@
-import React, { useMemo, useState, useCallback } from 'react'
-import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
+import React, { useMemo, useState, useCallback, memo } from 'react'
+import { ComboBox, PrimaryButton, IButtonStyles } from 'office-ui-fabric-react'
 import { useAvailableUsers } from '../../../hooks/useAvailableUsers'
 import { useHandleLogin } from '../../../hooks/useHandleLogin'
 import styles from './Home.module.scss'
 
-export interface LoginProps {}
+const loginButtonStyles: IButtonStyles = { root: { marginTop: '29px' } }
+const makeCbOption = (name: string) => ({ key: name, text: name })
 
-export const Login: React.FC<LoginProps> = () => {
+export const Login: React.FC = memo(() => {
 	const users = useAvailableUsers()
 	const [selectedUser, setSelectedUser] = useState('')
 	const comboBoxOptions = useMemo(
-		() =>
-			users
-				.filter(t => !!t)
-				.map(u => ({
-					key: u,
-					text: u,
-				})),
+		() => users.filter(t => !!t).map(u => makeCbOption(u)),
 		[users],
 	)
 	const handleComboBoxChange = useCallback(
@@ -44,11 +39,11 @@ export const Login: React.FC<LoginProps> = () => {
 						<PrimaryButton
 							text="Go"
 							onClick={handleLoginClick}
-							styles={{ root: { marginTop: '29px' } }}
+							styles={loginButtonStyles}
 						/>
 					</div>
 				</div>
 			</div>
 		</div>
 	)
-}
+})

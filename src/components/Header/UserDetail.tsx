@@ -6,15 +6,15 @@ import { Medal } from './Medal'
 
 export const UserDetail: React.FC = memo(() => {
 	const currentUser = useCurrentUser()
-	return (
+	return !!currentUser ? (
 		<div className={styles.userDetail}>
 			<Persona
 				className={styles.userName}
 				size={PersonaSize.size32}
-				text={currentUser || ''}
+				text={currentUser.email}
 			/>
-			<Medal metric={12} name="Kudos" />
-			<Medal metric={400} name="Points" />
+			<Medal metric={currentUser.email.length} name="Kudos" />
+			<Medal metric={currentUser.rewardPoints} name="Points" />
 		</div>
-	)
+	) : null
 })
