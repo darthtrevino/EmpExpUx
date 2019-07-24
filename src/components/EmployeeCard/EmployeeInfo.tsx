@@ -9,6 +9,7 @@ import {
 } from 'office-ui-fabric-react'
 import { Employee } from '../../api'
 import styles from './EmployeeInfo.module.scss'
+import Gauge from 'react-svg-gauge'
 
 const HumanHash = require('humanhash')
 const hh = new HumanHash()
@@ -50,6 +51,15 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 			[],
 		)
 
+		// Average of connectivity metrics
+		const influencerScore = useMemo(() => {
+			return Math.floor(
+				((employee.eigenCentrality + employee.betweenness + employee.pageRank) /
+					3) *
+					100,
+			)
+		}, [employee])
+
 		return (
 			<div className={styles.container}>
 				<Persona
@@ -58,7 +68,9 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 					onRenderSecondaryText={onRenderSecondaryText as any}
 				/>
 				<div className={styles.metricsPane}>
-					<div className={styles.metric}>97/100 Influencer</div>
+					<div className={styles.metric}>
+						<Gauge value={influencerScore} width={70} height={50} label="" />
+					</div>
 					<div className={styles.degreeConnection}>{degree}</div>
 				</div>
 			</div>
