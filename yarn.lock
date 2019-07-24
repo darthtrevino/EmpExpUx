@@ -9923,11 +9923,6 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-tag-autocomplete@^6.0.0-beta.1:
-  version "6.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/react-tag-autocomplete/-/react-tag-autocomplete-6.0.0-beta.1.tgz#4e242f72f8f24f301329ce64fa3981b44209e2e9"
-  integrity sha512-1AnnFwtLukhHhpmsE+aRj6667L6Pxtu9Jj2Ci9h7nW7cwhjRpHVToMz78mpL9oztopCDYAy8mpoW9hD37JYpKg==
-
 react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"

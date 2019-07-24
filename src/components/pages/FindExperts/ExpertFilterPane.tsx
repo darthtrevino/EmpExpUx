@@ -91,6 +91,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 								<Label>Relevant Skills</Label>
 								<CategoryFilter
 									categories={skills}
+									selectedCategories={selectedSkills}
 									onSelectionChanged={handleSkillsChanged}
 								/>
 							</div>
@@ -98,6 +99,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 								<Label>Project Involvement</Label>
 								<CategoryFilter
 									categories={projects}
+									selectedCategories={selectedProjects}
 									onSelectionChanged={handleProjectsChanged}
 								/>
 							</div>

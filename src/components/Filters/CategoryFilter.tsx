@@ -1,101 +1,71 @@
-import React, { useState, useMemo, useCallback, useEffect, memo } from 'react'
-
-// @ts-ignore
-import ReactTags from 'react-tag-autocomplete'
-import { ComboBox, PrimaryButton } from 'office-ui-fabric-react'
+import React, { useMemo, useCallback, memo } from 'react'
+import { TagPicker, ITag } from 'office-ui-fabric-react'
 import 'react-tag-autocomplete/'
 import './react-tags.css'
-import { useTripwire } from '../../hooks/useTripwire'
 import styles from './CategoryFilter.module.scss'
 import './ReactTagsCustom.scss'
 
-interface CategorySelection {
-	id: string
-	name: string
-}
-
-const toCategorySelection = (id: string) =>
-	({ id, name: id } as CategorySelection)
-
 export interface CategoryFilterProps {
 	categories: string[]
+	selectedCategories: string[]
 	onSelectionChanged: (selection: string[]) => void
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = memo(
-	({ categories, onSelectionChanged }) => {
-		const [selected, setSelected] = useState<CategorySelection[]>([])
-		const [interacted, markInteracted] = useTripwire()
-		const suggestions = useMemo<CategorySelection[]>(
-			() => categories.map(toCategorySelection),
-			[categories],
-		)
-		useEffect(() => {
-			if (interacted) {
-				onSelectionChanged(selected.map(s => s.id))
-			}
-		}, [selected, interacted, onSelectionChanged])
+	({ categories, selectedCategories, onSelectionChanged }) => {
+		const suggestions = useMemo<ITag[]>(() => categories.map(toTag), [
+			categories,
+		])
 
-		const handleAdd = useCallback(
-			(items: CategorySelection | CategorySelection[]) => {
-				markInteracted()
-				if (Array.isArray(items)) {
-					setSelected([...selected, ...items])
-				} else {
-					if (!selected.some(s => s.id === items.id)) {
-						setSelected([...selected, items])
-					}
+		const handleFilterChanged = useCallback(
+			(filterText: string, tagList: ITag[]): ITag[] => {
+				if (!filterText) {
+					return []
 				}
+				return suggestions
+					.filter(s => isTagQueryMatch(filterText, s))
+					.filter(tag => !isTagAlreadyPresent(tag, tagList))
 			},
-			[selected, markInteracted],
+			[suggestions],
 		)
-
-		const handleRemove = useCallback(
-			(index: number) => {
-				markInteracted()
-				setSelected([...selected.slice(0, index), ...selected.slice(index + 1)])
+		const handleTagsChanged = useCallback(
+			(items: ITag[] | undefined) => {
+				onSelectionChanged((items || []).map(i => i.key))
 			},
-			[selected, markInteracted],
-		)
-		const [selectedOption, setSelectedOption] = useState(categories[0])
-		useEffect(() => {
-			setSelectedOption(categories[0])
-		}, [categories])
-
-		const handleButtonClick = useCallback(
-			() => handleAdd(toCategorySelection(selectedOption)),
-			[selectedOption, handleAdd],
+			[onSelectionChanged],
 		)
 
-		const comboBoxOptions = useMemo(
-			() => categories.map(c => ({ key: c, text: c })),
-			[categories],
-		)
+		const selectedItems = useMemo(() => selectedCategories.map(toTag), [
+			selectedCategories,
+		])
 
 		return (
 			<div className={styles.container}>
 				<div className={styles.row}>
-					<ReactTags
-						tags={selected}
-						suggestions={suggestions}
-						onDelete={handleRemove}
-						onAddition={handleAdd}
-						placeholder="Add category"
-					/>
-				</div>
-				<div className={styles.rowRight}>
-					<ComboBox
-						selectedKey={selectedOption}
-						options={comboBoxOptions}
-						onChange={(props, item) => {
-							if (item && item.key) {
-								setSelectedOption(item.key as string)
-							}
+					<TagPicker
+						onResolveSuggestions={handleFilterChanged as any}
+						selectedItems={selectedItems}
+						pickerSuggestionsProps={{
+							suggestionsHeaderText: 'Suggested Skils',
+							noResultsFoundText: 'No Skills Found',
 						}}
-					></ComboBox>
-					<PrimaryButton onClick={handleButtonClick}>Add</PrimaryButton>
+						itemLimit={5}
+						onChange={handleTagsChanged}
+					/>
 				</div>
 			</div>
 		)
 	},
 )
+
+const isTagQueryMatch = (text: string, tag: ITag) =>
+	tag.name.toLowerCase().indexOf(text.toLowerCase()) === 0
+
+const isTagAlreadyPresent = (tag: ITag, tagList?: ITag[]) => {
+	if (!tagList || !tagList.length || tagList.length === 0) {
+		return false
+	}
+	return tagList.filter(compareTag => compareTag.key === tag.key).length > 0
+}
+
+const toTag = (id: string) => ({ key: id, name: id } as ITag)

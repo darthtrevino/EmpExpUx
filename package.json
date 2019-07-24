@@ -33,7 +33,6 @@
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1",
 		"react-scripts": "3.0.1",
-		"react-tag-autocomplete": "^6.0.0-beta.1",
 		"redux": "^4.0.4",
 		"redux-actions": "^2.6.5",
 		"redux-logger": "^3.0.6",

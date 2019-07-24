@@ -11,5 +11,15 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	margin: 10px;
+	width: 100%;
+}
+
+.comboBox {
+	margin-right: 5px;
+}
+
+.comboBoxContainer {
+	display: flex;
+	flex-direction: row;
+	margin-right: 5px;
 }
