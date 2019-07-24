@@ -1,7 +1,9 @@
-.row {
+.container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
+	flex: 1;
 }
 
 .expandIcon {
@@ -10,4 +12,23 @@
 
 .roleIcon {
 	margin-right: 5px;
+}
+
+.metricsPane {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.metric {
+	font-size: 12pt;
+	margin-right: 8px;
+}
+
+.degreeConnection {
+	background-color: #777;
+	color: #eee;
+	padding: 5px;
+	font-size: 14px;
+	border-radius: 4px;
 }

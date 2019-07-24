@@ -43,11 +43,17 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 		)
 
 		return (
-			<Persona
-				{...personaData}
-				size={PersonaSize.size72}
-				onRenderSecondaryText={onRenderSecondaryText as any}
-			/>
+			<div className={styles.container}>
+				<Persona
+					{...personaData}
+					size={PersonaSize.size72}
+					onRenderSecondaryText={onRenderSecondaryText as any}
+				/>
+				<div className={styles.metricsPane}>
+					<div className={styles.metric}>97/100 Influencer</div>
+					<div className={styles.degreeConnection}>2nd</div>
+				</div>
+			</div>
 		)
 	},
 )
