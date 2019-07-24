@@ -2,3 +2,19 @@
 	padding: 15px;
 	margin-bottom: 15px;
 }
+
+.messageContainer {
+	padding: 15px;
+	font-weight: 300;
+}
+
+.actionPane {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-top: 15px;
+}
+
+.actionButton {
+	margin-right: 5px;
+}

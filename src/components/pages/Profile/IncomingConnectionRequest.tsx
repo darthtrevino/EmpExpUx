@@ -1,4 +1,11 @@
-import React from 'react'
+import React, { memo, useCallback } from 'react'
+import {
+	Persona,
+	PersonaSize,
+	Text,
+	DefaultButton,
+	PrimaryButton,
+} from 'office-ui-fabric-react'
 import { ExpertConnection } from '../../../api'
 import styles from './IncomingConnectionRequest.module.scss'
 import classnames from 'classnames'
@@ -9,12 +16,37 @@ export interface IncomingConnectionRequestProps {
 
 export const IncomingConnectionRequest: React.FC<
 	IncomingConnectionRequestProps
-> = ({ connection }) => {
+> = memo(({ connection }) => {
+	const onDismiss = useCallback(
+		() => console.log('Dismss connection request'),
+		[],
+	)
+	const onAccept = useCallback(
+		() => console.log('Accept connection request'),
+		[],
+	)
 	return (
 		<div className={classnames(styles.container, 'ms-depth-8')}>
-			<div>{connection.id}</div>
-			<div>{connection.requestorEmail}</div>
-			<div>{connection.requestorMessage}</div>
+			<Persona size={PersonaSize.size32} text={connection.requestorEmail} />
+			<div className={styles.messageContainer}>
+				<Text className={styles.messageContainer} variant="mediumPlus">
+					{connection.requestorMessage}
+				</Text>
+			</div>
+			<div className={styles.actionPane}>
+				<div className={styles.actionPane}>
+					<DefaultButton
+						className={styles.actionButton}
+						onClick={onDismiss}
+						text="Dismiss"
+					/>
+					<PrimaryButton
+						className={styles.actionButton}
+						onClick={onAccept}
+						text="Accept"
+					/>
+				</div>
+			</div>
 		</div>
 	)
-}
+})
