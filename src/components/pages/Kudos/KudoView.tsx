@@ -17,7 +17,6 @@ export const KudoView: React.FC<KudoViewProps> = memo(({ kudo }) => {
 	} as any
 	return (
 		<div className={classnames(styles.container, 'ms-depth-8')}>
-			<KudoThumb />
 			<div className={styles.kudoDetail}>
 				<Persona size={PersonaSize.size32} text={kudo.suggestedFromEmail} />
 				<div className={styles.textContainer}>
@@ -26,6 +25,7 @@ export const KudoView: React.FC<KudoViewProps> = memo(({ kudo }) => {
 					</Text>
 				</div>
 			</div>
+			<KudoThumb />
 		</div>
 	)
 })
