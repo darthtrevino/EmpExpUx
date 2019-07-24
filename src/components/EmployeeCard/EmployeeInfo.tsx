@@ -15,12 +15,10 @@ const hh = new HumanHash()
 
 interface EmployeeInfoProps {
 	employee: Employee
-	expanded: boolean
-	onToggleExpanded: () => void
 }
 
 export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
-	({ employee, expanded, onToggleExpanded }) => {
+	({ employee }) => {
 		const personaData: IPersonaSharedProps = useMemo(
 			() => ({
 				imageUrl: undefined,
@@ -45,18 +43,11 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 		)
 
 		return (
-			<div className={styles.row}>
-				<Persona
-					{...personaData}
-					size={PersonaSize.size72}
-					onRenderSecondaryText={onRenderSecondaryText as any}
-				/>
-				<Icon
-					className={styles.expandIcon}
-					iconName={expanded ? 'ChevronDown' : 'ChevronUp'}
-					onClick={onToggleExpanded}
-				/>
-			</div>
+			<Persona
+				{...personaData}
+				size={PersonaSize.size72}
+				onRenderSecondaryText={onRenderSecondaryText as any}
+			/>
 		)
 	},
 )

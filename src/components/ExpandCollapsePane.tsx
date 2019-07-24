@@ -3,7 +3,7 @@ import { Icon } from 'office-ui-fabric-react'
 import styles from './ExpandCollapsePane.module.scss'
 
 export interface ExpandCollapsePaneProps {
-	title: string
+	title: JSX.Element | string
 	defaultExpanded?: boolean
 }
 
