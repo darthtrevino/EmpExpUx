@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from 'react'
 import { IconButton, Nav, INavLink } from 'office-ui-fabric-react'
 import { withRouter } from 'react-router-dom'
 import { jsStyles } from './Navigation.styles'
+import { usePointsAwarder } from '../../hooks/usePointsAwarder'
 
 const ICON_PROPS = { iconName: 'GlobalNavButton' }
 
@@ -9,14 +10,16 @@ export const Navigation = memo(
 	withRouter(({ history }) => {
 		let [isOpen, setIsOpen] = useState(true)
 		let toggleNav = useCallback(() => setIsOpen(!isOpen), [isOpen, setIsOpen])
+		const award = usePointsAwarder()
 		const styles = jsStyles(isOpen)
 
 		const handleLinkClick = useCallback(
 			(ev, el) => {
 				ev.preventDefault()
 				history.push(el.url)
+				award(5)
 			},
-			[history],
+			[history, award],
 		)
 
 		return (

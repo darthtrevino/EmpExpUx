@@ -27,6 +27,10 @@ enum HttpMethod {
 	PUT = 'PUT',
 }
 
+const JsonHeaders = {
+	'Content-Type': 'application/json',
+}
+
 export class ServiceApi {
 	public constructor(private serviceRoot: string) {}
 
@@ -41,6 +45,7 @@ export class ServiceApi {
 	public async addEmployee(employee: Employee): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Employee), {
 			method: HttpMethod.POST,
+			headers: JsonHeaders,
 			body: JSON.stringify(employee),
 		})
 		this.inspectResponse(response)
@@ -49,6 +54,7 @@ export class ServiceApi {
 	public async updateEmployee(employee: Employee): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Employee), {
 			method: HttpMethod.PUT,
+			headers: JsonHeaders,
 			body: JSON.stringify(employee),
 		})
 		this.inspectResponse(response)
@@ -85,6 +91,7 @@ export class ServiceApi {
 	public async addKudo(kudo: Kudo): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Kudos), {
 			method: HttpMethod.POST,
+			headers: JsonHeaders,
 			body: JSON.stringify(kudo),
 		})
 		this.inspectResponse(response)
@@ -93,6 +100,7 @@ export class ServiceApi {
 	public async updateKudo(kudo: Kudo): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.Kudos), {
 			method: HttpMethod.PUT,
+			headers: JsonHeaders,
 			body: JSON.stringify(kudo),
 		})
 		this.inspectResponse(response)
@@ -103,7 +111,8 @@ export class ServiceApi {
 		rewardPointsToAdd: number,
 	): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.EmployeeRewards), {
-			method: HttpMethod.POST,
+			method: HttpMethod.PUT,
+			headers: JsonHeaders,
 			body: JSON.stringify({
 				email,
 				rewardPointsToAdd,
@@ -128,6 +137,7 @@ export class ServiceApi {
 	): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.ExpertConnection), {
 			method: HttpMethod.PUT,
+			headers: JsonHeaders,
 			body: JSON.stringify(connection),
 		})
 		this.inspectResponse(response)
@@ -149,6 +159,7 @@ export class ServiceApi {
 	): Promise<void> {
 		const response = await fetch(this.endpoint(Endpoint.InfluencerConnection), {
 			method: HttpMethod.PUT,
+			headers: JsonHeaders,
 			body: JSON.stringify(connection),
 		})
 		this.inspectResponse(response)
