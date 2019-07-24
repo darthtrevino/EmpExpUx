@@ -32,3 +32,13 @@
 	flex-direction: row;
 	flex: 1;
 }
+
+.actionPane {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.actionButton {
+	margin-right: 5px;
+}

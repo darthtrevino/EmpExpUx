@@ -1,27 +1,28 @@
 import React, { memo, useState, useCallback } from 'react'
 import styles from './ConnectionRequestActions.module.scss'
 import { PrimaryButton } from 'office-ui-fabric-react'
-import { ConnectionRequestModal } from './ConnectionReqestModal'
-import { useConnectionRequestHandler } from '../../hooks/useConnectionRequestHandler'
-import { Employee } from '../../api'
+import { ConnectionRequestModal } from '../../EmployeeCard/ConnectionReqestModal'
+import { useConnectionRequestHandler } from '../../../hooks/useConnectionRequestHandler'
+import { Employee } from '../../../api'
 
 export interface ConnectionRequestActionsProps {
-	employee: Employee
+	employees: Employee[]
 }
 
 export const ConnectionRequestActions: React.FC<
 	ConnectionRequestActionsProps
-> = memo(({ employee }) => {
+> = memo(({ employees }) => {
 	const [modalOpen, setModalOpen] = useState(false)
 	const [requestSent, setRequestSent] = useState(false)
 	const requestConnection = useConnectionRequestHandler()
 	const handleConnectionRequest = useCallback(
 		(message: string) => {
 			setModalOpen(false)
-			requestConnection(employee, message)
-			setRequestSent(true)
+			Promise.all(employees.map(e => requestConnection(e, message))).then(() =>
+				setRequestSent(true),
+			)
 		},
-		[employee, requestConnection],
+		[employees, requestConnection],
 	)
 	const handleClickConnection = useCallback(() => {
 		setModalOpen(true)

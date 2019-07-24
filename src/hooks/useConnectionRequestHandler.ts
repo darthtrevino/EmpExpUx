@@ -7,19 +7,21 @@ export function useConnectionRequestHandler() {
 
 	return useCallback(
 		(targetEmployee: Employee, message: string) => {
-			if (!currentUser) {
+			if (!currentUser || targetEmployee.email === currentUser.email) {
 				return
 			}
-			api.addExpertConnection({
+
+			const payload = {
 				requestorEmail: currentUser.email,
 				suggestedExpertEmail: targetEmployee.email,
 				suggestionSource: 'model',
 				requestorMessage: message,
-				expertResponseStatus: 'NoResponse',
-				referredToEmail: 'None',
-				responseTimeInHours: 0,
-			} as any)
-			console.log('Make Connection with', targetEmployee)
+			}
+			console.log('PAYLOAD', payload)
+			return api.addExpertConnection(payload as any).catch(err => {
+				console.log('CAUGHT ON ', targetEmployee)
+				throw err
+			})
 		},
 		[currentUser],
 	)

@@ -1,22 +1,24 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
-import { Label } from 'office-ui-fabric-react'
+import { Label, PrimaryButton } from 'office-ui-fabric-react'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
 import { TextField } from 'office-ui-fabric-react'
-import { Skill, Project, FilterExpression } from '../../../api'
+import { Skill, Project, FilterExpression, Employee } from '../../../api'
 import { useTripwire } from '../../../hooks/useTripwire'
 import { buildFilter } from './buildFilter'
 import classnames from 'classnames'
 import styles from './ExpertFilterPane.module.scss'
 import { ExpandCollapsePane } from '../../ExpandCollapsePane'
+import { ConnectionRequestActions } from './ConnectionRequestActions'
 
 export interface ExpertFilterPaneProps {
+	selectedEmployees: Employee[]
 	onFilterChange: (expr: FilterExpression) => void
 }
 
 export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
-	({ onFilterChange }) => {
+	({ onFilterChange, selectedEmployees }) => {
 		const projects = useProjects()
 		const skills = useSkills()
 
@@ -92,6 +94,9 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 						</div>
 					</div>
 				</ExpandCollapsePane>
+				<div className={styles.actionPane}>
+					<ConnectionRequestActions employees={selectedEmployees} />
+				</div>
 			</div>
 		)
 	},
