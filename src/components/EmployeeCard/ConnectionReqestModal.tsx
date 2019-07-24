@@ -5,7 +5,7 @@ import {
 	DefaultButton,
 	PrimaryButton,
 } from 'office-ui-fabric-react'
-import styles from './ConnectionRequest.module.scss'
+import styles from './ConnectionRequestModal.module.scss'
 
 export interface ConnectionRequestModalProps {
 	isOpen: boolean

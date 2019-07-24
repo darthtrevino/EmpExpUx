@@ -1,0 +1,25 @@
+.container {
+	flex: 1;
+	margin: 80px;
+	padding: 40px;
+}
+
+.body {
+	margin-top: 15px;
+}
+
+.actionPane {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	margin-top: 15px;
+}
+
+.actionButton {
+	margin-right: 5px;
+}
+
+.header {
+	font-size: 18px;
+	font-weight: 300;
+}

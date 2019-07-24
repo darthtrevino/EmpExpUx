@@ -10,6 +10,7 @@ import { OutgoingConnectionRequest } from './OutgoingConnectionRequest'
 export const Profile: React.FC = memo(() => {
 	const requestsMadeByMe = useSelector((s: State) => s.expertConnections.byMe)
 	const requestsMadeToMe = useSelector((s: State) => s.expertConnections.toMe)
+
 	return (
 		<Page name="My Expertise">
 			<div className={styles.page}>

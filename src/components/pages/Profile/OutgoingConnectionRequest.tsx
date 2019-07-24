@@ -14,7 +14,6 @@ export interface OutgoingConnectionRequestProps {
 export const OutgoingConnectionRequest: React.FC<
 	OutgoingConnectionRequestProps
 > = memo(({ connection }) => {
-	console.log('CON', connection)
 	const isAccepted = connection.expertResponseStatus === 'Accepted'
 	const emailText = isAccepted
 		? connection.requestorEmail

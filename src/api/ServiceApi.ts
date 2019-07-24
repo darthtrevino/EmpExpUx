@@ -143,6 +143,32 @@ export class ServiceApi {
 		this.inspectResponse(response)
 	}
 
+	public async acceptExpertConnection(id: string, message: string) {
+		const response = await fetch(this.endpoint(Endpoint.ExpertConnection), {
+			method: HttpMethod.PUT,
+			headers: JsonHeaders,
+			body: JSON.stringify({
+				id,
+				expertResponseStatus: 'Accepted',
+				expertResponseMessage: message,
+			}),
+		})
+		this.inspectResponse(response)
+	}
+
+	public async declineExpertConnection(id: string, message: string) {
+		const response = await fetch(this.endpoint(Endpoint.ExpertConnection), {
+			method: HttpMethod.PUT,
+			headers: JsonHeaders,
+			body: JSON.stringify({
+				id,
+				expertResponseStatus: 'Declined',
+				expertResponseMessage: message,
+			}),
+		})
+		this.inspectResponse(response)
+	}
+
 	public async getInfluencerConnections(
 		email: string,
 	): Promise<InfluencerConnection[]> {
