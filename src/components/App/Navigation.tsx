@@ -58,6 +58,7 @@ const NavigationGroups: Array<{ links: INavLink[] }> = [
 			makeLink('Expertise Reqests', '/profile', 'Contact'),
 			makeLink('Skills Marketplace', '/skills-marketplace', 'Globe'), // or Devices2
 			makeLink('Kudos', '/kudos', 'Like'),
+			makeLink('TODO', '/todo', 'CheckboxComposite'),
 		],
 	},
 ]
