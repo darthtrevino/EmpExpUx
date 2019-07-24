@@ -10,13 +10,20 @@ export interface KudoViewProps {
 }
 
 export const KudoView: React.FC<KudoViewProps> = memo(({ kudo }) => {
+	const textStyles = {
+		root: {
+			fontStyle: 'italic',
+		},
+	} as any
 	return (
 		<div className={classnames(styles.container, 'ms-depth-8')}>
 			<KudoThumb />
 			<div className={styles.kudoDetail}>
 				<Persona size={PersonaSize.size32} text={kudo.suggestedFromEmail} />
 				<div className={styles.textContainer}>
-					<Text variant="mediumPlus">{kudo.actualkudoMessage}</Text>
+					<Text variant="mediumPlus" styles={textStyles}>
+						{kudo.actualkudoMessage}
+					</Text>
 				</div>
 			</div>
 		</div>
