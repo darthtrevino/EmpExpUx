@@ -45,6 +45,11 @@ export const IncomingConnectionRequest: React.FC<
 						onClick={onAccept}
 						text="Accept"
 					/>
+					<PrimaryButton
+						className={styles.actionButton}
+						onClick={onAccept}
+						text="Refer"
+					/>
 				</div>
 			</div>
 		</div>
