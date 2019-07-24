@@ -16,16 +16,19 @@
 			margin: 11px;
 		}
 	}
-	.title {
+	.title,
+	.username {
 		flex: 1 1 0px;
 		font-size: 20px;
 		font-weight: 400;
 		color: #385868;
 		padding: 0 22px;
-		text-align: left;
 	}
-}
-
-.currentUser {
-	margin-right: 8px;
+	.username {
+		text-align: right;
+		font-size: 17px;
+		span {
+			line-height: 30px;
+		}
+	}
 }

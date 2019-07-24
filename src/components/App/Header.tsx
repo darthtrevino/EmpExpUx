@@ -15,7 +15,9 @@ export const Header: React.FC = memo(() => {
 					<img src={brandMark} role="presentation" alt={imgAlt} />
 				</div>
 				<div className={styles.title}>{titleText}</div>
-				<div className={styles.currentUser}>{currentUser || ''}</div>
+				<div className={styles.username}>
+					<span>{currentUser}</span>
+				</div>
 			</div>
 		</div>
 	)
