@@ -88,21 +88,23 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 									onChange={handleOrganizationChanged}
 								/>
 							</div>
-							<div className={styles.filterSection}>
-								<Label>Relevant Skills</Label>
-								<CategoryFilter
-									categories={skills}
-									selectedCategories={selectedSkills}
-									onSelectionChanged={handleSkillsChanged}
-								/>
-							</div>
-							<div className={styles.filterSection}>
-								<Label>Project Involvement</Label>
-								<CategoryFilter
-									categories={projects}
-									selectedCategories={selectedProjects}
-									onSelectionChanged={handleProjectsChanged}
-								/>
+							<div className={styles.tagsContainer}>
+								<div className={styles.filterSection}>
+									<Label>Relevant Skills</Label>
+									<CategoryFilter
+										categories={skills}
+										selectedCategories={selectedSkills}
+										onSelectionChanged={handleSkillsChanged}
+									/>
+								</div>
+								<div className={styles.filterSection}>
+									<Label>Project Involvement</Label>
+									<CategoryFilter
+										categories={projects}
+										selectedCategories={selectedProjects}
+										onSelectionChanged={handleProjectsChanged}
+									/>
+								</div>
 							</div>
 						</>
 					) : null}

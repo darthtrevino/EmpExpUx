@@ -23,5 +23,12 @@
 }
 
 .filterSection {
+	flex: 1;
 	padding: 15px;
+}
+
+.tagsContainer {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
 }
