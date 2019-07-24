@@ -24,3 +24,13 @@
 	font-weight: 300;
 	margin-bottom: 30px;
 }
+
+.requestSectionHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.headerIcon {
+	cursor: default;
+}
