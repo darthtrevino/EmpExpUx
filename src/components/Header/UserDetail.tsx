@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styles from './UserDetail.module.scss'
-import { Persona, PersonaSize, Icon } from 'office-ui-fabric-react'
+import { Persona, PersonaSize } from 'office-ui-fabric-react'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
+import { Medal } from './Medal'
 
-export const UserDetail: React.FC = () => {
+export const UserDetail: React.FC = memo(() => {
 	const currentUser = useCurrentUser()
 	return (
 		<div className={styles.userDetail}>
@@ -12,22 +13,8 @@ export const UserDetail: React.FC = () => {
 				size={PersonaSize.size32}
 				text={currentUser || ''}
 			/>
-			<div className={styles.gameMetricContainer}>
-				12
-				<Icon
-					className={styles.gameMetricIcon}
-					iconName="Like"
-					ariaLabel="Kudos"
-				/>
-			</div>
-			<div className={styles.gameMetricContainer}>
-				400
-				<Icon
-					className={styles.gameMetricIcon}
-					iconName="Medal"
-					ariaLabel="Points"
-				/>
-			</div>
+			<Medal metric={12} name="Kudos" />
+			<Medal metric={400} name="Points" />
 		</div>
 	)
-}
+})
