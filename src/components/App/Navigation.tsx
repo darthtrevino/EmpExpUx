@@ -55,6 +55,7 @@ const NavigationGroups: Array<{ links: INavLink[] }> = [
 		links: [
 			makeLink('Home', '/', 'Home'),
 			makeLink('Find Experts', '/experts', 'SearchNearby'),
+			makeLink('Connect Influencers', '/influencers', 'GitGraph'),
 			makeLink('Expertise Requests', '/profile', 'Contact'),
 			makeLink('Skills Marketplace', '/skills-marketplace', 'Globe'), // or Devices2
 			makeLink('Kudos', '/kudos', 'Like'),
