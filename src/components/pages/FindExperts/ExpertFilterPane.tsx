@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from 'react'
-import { Icon, Label } from 'office-ui-fabric-react'
-import posed from 'react-pose'
+import { Label } from 'office-ui-fabric-react'
 import { useProjects } from '../../../hooks/useProjects'
 import { useSkills } from '../../../hooks/useSkills'
 import { CategoryFilter } from '../../Filters/CategoryFilter'
