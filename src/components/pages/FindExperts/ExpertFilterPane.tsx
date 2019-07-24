@@ -84,6 +84,7 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 							<div className={styles.filterSection}>
 								<TextField
 									label="Organization"
+									value={organization}
 									onChange={handleOrganizationChanged}
 								/>
 							</div>
