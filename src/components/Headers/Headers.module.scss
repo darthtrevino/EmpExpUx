@@ -1,0 +1,33 @@
+@import '../../styles/ColorPalette.scss';
+
+.headerCnt {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 0;
+	height: 88px;
+	.numberCnt {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 400;
+		color: $white;
+		background-color: $coolGray-primary;
+		width: 28px;
+		height: 28px;
+		border-radius: 14px;
+		margin-right: 16px;
+		line-height: 1;
+	}
+	.titleCnt {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		width: 100%;
+		border-bottom: 2px solid $steel-tertiary;
+		padding-bottom: 7px;
+		font-weight: 600;
+		font-size: 26px;
+	}
+}
