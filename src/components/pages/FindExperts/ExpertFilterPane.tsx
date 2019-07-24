@@ -102,8 +102,6 @@ export const ExpertFilterPane: React.FC<ExpertFilterPaneProps> = memo(
 					{expanded ? (
 						<>
 							<div className={styles.filterSection}>
-								{/* <Label>Organization</Label>
-								<TextFilter onSelectionChanged={handleOrganizationChanged} /> */}
 								<TextField
 									label="Organization"
 									onChange={handleOrganizationChanged}
