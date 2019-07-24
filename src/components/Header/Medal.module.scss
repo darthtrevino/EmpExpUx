@@ -1,0 +1,35 @@
+.gameMetricContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 8px 0 8px;
+}
+
+.gameMetricText {
+	font-size: 14px;
+	margin-right: 7px;
+}
+
+.gameMetricIcon {
+	margin: 0 8px 0 8px;
+	position: absolute;
+	right: 0;
+}
+
+.gameMetricIconBack {
+	@extend .gameMetricIcon;
+	color: gold;
+}
+.gameMetricIconFront {
+	@extend .gameMetricIcon;
+	color: black;
+}
+
+.gameMetricIconContainer {
+	position: relative;
+	width: 20px;
+	height: 20px;
+	margin-left: 5px;
+	right: 0;
+}
