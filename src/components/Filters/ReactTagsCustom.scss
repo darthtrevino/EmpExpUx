@@ -1,0 +1,21 @@
+@import '../../styles/ColorPalette.scss';
+
+.react-tags {
+	height: auto;
+	overflow: auto;
+}
+.react-tags__selected-tag {
+	display: inline-block;
+	background-color: $mint-dark;
+	border: 0;
+	color: $neutral-white;
+	margin: 0 7px 7px 0;
+	padding: 7px 15px;
+	font-size: 13px;
+	&::after {
+		color: $neutral-white;
+	}
+}
+.react-tags__search {
+	display: block;
+}
