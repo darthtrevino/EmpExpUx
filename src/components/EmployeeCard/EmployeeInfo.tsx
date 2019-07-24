@@ -17,6 +17,8 @@ interface EmployeeInfoProps {
 	employee: Employee
 }
 
+const degreeOptions = ['1st', '2nd', '3rd', '4th']
+
 export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 	({ employee }) => {
 		const personaData: IPersonaSharedProps = useMemo(
@@ -42,6 +44,12 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 			[],
 		)
 
+		const degree = useMemo(
+			() =>
+				degreeOptions[Math.floor(Math.random() * 100) % degreeOptions.length],
+			[],
+		)
+
 		return (
 			<div className={styles.container}>
 				<Persona
@@ -51,7 +59,7 @@ export const EmployeeInfo: React.FC<EmployeeInfoProps> = memo(
 				/>
 				<div className={styles.metricsPane}>
 					<div className={styles.metric}>97/100 Influencer</div>
-					<div className={styles.degreeConnection}>2nd</div>
+					<div className={styles.degreeConnection}>{degree}</div>
 				</div>
 			</div>
 		)
