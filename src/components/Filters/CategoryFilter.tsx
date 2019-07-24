@@ -1,9 +1,6 @@
 import React, { useMemo, useCallback, memo } from 'react'
 import { TagPicker, ITag } from 'office-ui-fabric-react'
-import 'react-tag-autocomplete/'
-import './react-tags.css'
 import styles from './CategoryFilter.module.scss'
-import './ReactTagsCustom.scss'
 
 export interface CategoryFilterProps {
 	categories: string[]

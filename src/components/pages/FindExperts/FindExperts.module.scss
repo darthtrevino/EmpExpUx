@@ -1,0 +1,15 @@
+.gutter {
+	flex: 1;
+}
+
+.results {
+	flex: 4;
+	display: flex;
+	flex-direction: column;
+}
+
+.resultsPane {
+	display: flex;
+	flex: 1;
+	flex-direction: row;
+}
