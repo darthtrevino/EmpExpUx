@@ -1,5 +1,12 @@
 import { createAction } from 'redux-actions'
-import { ExpertConnection, Project, Skill, Topic, Employee } from '../../api'
+import {
+	ExpertConnection,
+	Project,
+	Skill,
+	Topic,
+	Employee,
+	Kudo,
+} from '../../api'
 
 // Action Types
 export const RECEIVE_API_PROJECTS = 'RECEIVE_API_PROJECTS'
@@ -9,6 +16,8 @@ export const RECEIVE_API_USERS = 'RECEIVE_API_USERS'
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER'
 export const RECEIVE_REQUESTS_MADE_BY_ME = 'RECEIVE_REQUESTS_MADE_BY_ME'
 export const RECEIVE_REQUESTS_MADE_TO_ME = 'RECEIVE_REQUESTS_MADE_TO_ME'
+export const RECEIVE_KUDOS_TO_ME = 'RECEIVE_KUDOS_TO_ME'
+export const RECEIVE_KUDOS_FROM_ME = 'RECEIVE_KUDOS_FROM_ME'
 
 // Action Creators
 export const receiveApiProjects = createAction<Project[]>(RECEIVE_API_PROJECTS)
@@ -22,3 +31,5 @@ export const receiveRequestsMadeByMe = createAction<ExpertConnection[]>(
 export const receiveRequestsMadeToMe = createAction<ExpertConnection[]>(
 	RECEIVE_REQUESTS_MADE_TO_ME,
 )
+export const receiveKudosToMe = createAction<Kudo[]>(RECEIVE_KUDOS_TO_ME)
+export const receiveKudosFromMe = createAction<Kudo[]>(RECEIVE_KUDOS_FROM_ME)
