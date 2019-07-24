@@ -16,12 +16,15 @@ export function useConnectionRequestHandler() {
 				suggestedExpertEmail: targetEmployee.email,
 				suggestionSource: 'model',
 				requestorMessage: message,
-				expertResponseStatus: 'NoResponse',
 			}
 			console.log('Sent request', payload)
-			return api.addExpertConnection(payload as any).catch(err => {
-				throw err
-			})
+			return api
+				.addExpertConnection(payload as any)
+				.then(() => console.log(`Request to ${targetEmployee.email} OK`))
+				.catch(err => {
+					console.log('Error with request', payload)
+					throw err
+				})
 		},
 		[currentUser],
 	)
