@@ -7,6 +7,7 @@ import {
 	receiveRequestsMadeToMe,
 } from './state/actions'
 
+// TODO: this is pretty coarse. Don't use this as a normative example for data loading
 export function loadCurrentUserData() {
 	const login = getCurrentUser()
 	if (login) {
