@@ -1,5 +1,14 @@
 import querystring from 'query-string'
-import { Employee, Skill, Project, Topic, FilterExpression } from './model'
+import {
+	Kudo,
+	Employee,
+	Skill,
+	Project,
+	Topic,
+	FilterExpression,
+	ExpertConnection,
+	InfluencerConnection,
+} from './model'
 import { serialize } from './filters'
 
 enum Endpoint {
@@ -7,6 +16,10 @@ enum Endpoint {
 	Skills = 'Skills',
 	Projects = 'Projects',
 	Topics = 'Topics',
+	Kudos = 'Kudos',
+	EmployeeRewards = 'EmployeeRewards',
+	ExpertConnection = 'ExpertConnection',
+	InfluencerConnection = 'InfluencerConnection',
 }
 
 enum HttpMethod {
@@ -60,6 +73,85 @@ export class ServiceApi {
 		this.inspectResponse(response)
 		const json = await response.json()
 		return json as Skill[]
+	}
+
+	public async getKudos(email: string): Promise<Kudo[]> {
+		const response = await fetch(this.endpoint(Endpoint.Kudos, { email }))
+		this.inspectResponse(response)
+		const json = await response.json()
+		return json as Kudo[]
+	}
+
+	public async addKudo(kudo: Kudo): Promise<void> {
+		const response = await fetch(this.endpoint(Endpoint.Kudos), {
+			method: HttpMethod.POST,
+			body: JSON.stringify(kudo),
+		})
+		this.inspectResponse(response)
+	}
+
+	public async updateKudo(kudo: Kudo): Promise<void> {
+		const response = await fetch(this.endpoint(Endpoint.Kudos), {
+			method: HttpMethod.PUT,
+			body: JSON.stringify(kudo),
+		})
+		this.inspectResponse(response)
+	}
+
+	public async addRewardPoints(
+		email: string,
+		rewardPointsToAdd: number,
+	): Promise<void> {
+		const response = await fetch(this.endpoint(Endpoint.EmployeeRewards), {
+			method: HttpMethod.POST,
+			body: JSON.stringify({
+				email,
+				rewardPointsToAdd,
+			}),
+		})
+		this.inspectResponse(response)
+	}
+
+	public async getExpertConnections(
+		email: string,
+	): Promise<ExpertConnection[]> {
+		const response = await fetch(
+			this.endpoint(Endpoint.ExpertConnection, { email }),
+		)
+		this.inspectResponse(response)
+		const json = await response.json()
+		return json as ExpertConnection[]
+	}
+
+	public async addExpertConnection(
+		connection: ExpertConnection,
+	): Promise<void> {
+		const response = await fetch(this.endpoint(Endpoint.ExpertConnection), {
+			method: HttpMethod.PUT,
+			body: JSON.stringify(connection),
+		})
+		this.inspectResponse(response)
+	}
+
+	public async getInfluencerConnections(
+		email: string,
+	): Promise<InfluencerConnection[]> {
+		const response = await fetch(
+			this.endpoint(Endpoint.InfluencerConnection, { email }),
+		)
+		this.inspectResponse(response)
+		const json = await response.json()
+		return json as InfluencerConnection[]
+	}
+
+	public async addInfluencerConnection(
+		connection: InfluencerConnection,
+	): Promise<void> {
+		const response = await fetch(this.endpoint(Endpoint.InfluencerConnection), {
+			method: HttpMethod.PUT,
+			body: JSON.stringify(connection),
+		})
+		this.inspectResponse(response)
 	}
 
 	private endpoint(endpoint: Endpoint, queryArgs?: Record<string, string>) {

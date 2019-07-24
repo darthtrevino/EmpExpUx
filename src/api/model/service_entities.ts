@@ -68,3 +68,42 @@ export interface Employee {
 export type Skill = string
 export type Project = string
 export type Topic = string
+
+export interface Kudo {
+	id: string
+	email: string
+	actualkudoMessage: string
+	suggestedFromEmail: string
+	suggestedToEmail: string
+	ActionTaken: string
+	kudoState: string
+}
+
+export interface ExpertConnection {
+	// not required on create
+	id?: string
+
+	requestGroupId: string
+	requestorEmail: string
+	suggestedExpertEmail: string
+	suggestionSource: string
+	requestorMessage: string
+	expertResponseStatus: string
+	expertResponseMessage?: string
+	referredToEmail: string
+	responseTimeInHours: number
+	type: string
+}
+
+export interface InfluencerConnection {
+	// not required on create
+	id?: string
+	requestGroupId: string
+	transformationLeaderEmail: string
+	suggestedInfluencerEmail: string
+	transformationRequestMessage: string
+	influencerResponseStatus: string
+	influencerResponseMessage?: string
+	responseTimeInHours: number
+	type: string
+}
