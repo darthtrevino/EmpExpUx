@@ -73,6 +73,7 @@ export interface Kudo {
 	id: string
 	email: string
 	actualkudoMessage: string
+	suggestedkudoMessage: string
 	suggestedFromEmail: string
 	suggestedToEmail: string
 	ActionTaken: string
