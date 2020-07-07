@@ -24,7 +24,7 @@
 		"install": "^0.13.0",
 		"lodash": "^4.17.15",
 		"node-sass": "^4.12.0",
-		"npm": "^6.10.1",
+		"npm": "^6.14.6",
 		"office-ui-fabric-react": "^7.13.0",
 		"query-string": "^6.8.1",
 		"react": "^16.8.6",
