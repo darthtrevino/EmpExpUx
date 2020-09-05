@@ -23,7 +23,7 @@
 		"humanhash": "^1.0.4",
 		"install": "^0.13.0",
 		"lodash": "^4.17.15",
-		"node-sass": "^4.12.0",
+		"node-sass": "^4.13.1",
 		"npm": "^6.10.1",
 		"office-ui-fabric-react": "^7.13.0",
 		"query-string": "^6.8.1",
